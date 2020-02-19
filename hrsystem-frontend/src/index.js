@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import MaterialUIPickers from "./TestComponents/DatePickers";
-import NewLeave from './pages/Leave/NewLeave';
-import SampleTemplate from './TestComponents/SampleTemplate';
-import LeaveDashboard from './pages/Leave/LeaveDashboard';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

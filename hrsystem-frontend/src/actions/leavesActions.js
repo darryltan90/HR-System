@@ -1,25 +1,17 @@
 //used to manage api calls
 import axios from 'axios'
-import { GET_ERRORS, DELETE_LEAVE, GET_LEAVES, GET_LEAVE } from "./types";
+import { DELETE_LEAVE, GET_LEAVES, GET_LEAVE, POST } from "./types";
 
 //Add new leave---------------------------------------------------------
 export const addLeave = (leave, history) => async dispatch => {
    //try {
-   await axios.post("http://localhost:8080/hrsystemApi/leaves/add", leave)
-   history.push("/")
+   const res = await axios.post("http://localhost:8080/hrsystemApi/leaves/add", leave)
+   console.log('res :: ', res)
+   dispatch({ type: POST, payload: res.data });
 
-   // clear out payload for error each time as it will stay in the state
-   //    dispatch({
-   //       type: GET_ERRORS,
-   //       payload: {}
-   //    })
-   // } catch (error) {
-   //    // only gets the error message
-   //    dispatch({
-   //       type: GET_ERRORS,
-   //       payload: error.response.data
-   //    })
-   //}
+   if (history) {
+      history.push("/employee/leave")
+   }
 }
 
 //Get all leaves--------------------------------------------------------

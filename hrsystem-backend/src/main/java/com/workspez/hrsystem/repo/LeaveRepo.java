@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.workspez.hrsystem.domain.Leave;
 
 @Repository
-public interface LeaveRepo extends CrudRepository<Leave, Long>{
+public interface LeaveRepo extends JpaRepository<Leave, Long>{
 
 	Leave getById(Long id);
 	

@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import LeaveCard from './widget/LeaveCard'
+import AdminLeaveCard from './widget/AdminLeaveCard'
 import { Card, Layout, Row, Col, Button } from 'antd'
-import Header from 'antd/lib/calendar/Header'
-import MenuHeader from '../../components/MenuHeader'
+import MenuHeader from '../../../components/MenuHeader'
 import { Link } from 'react-router-dom'
-import { getLeaves } from "./../../actions/leavesActions";
+import { getLeaves } from "../../../actions/leavesActions";
 import { connect } from 'react-redux'
 
-class LeaveDashboard extends Component {
+class AdminLeaveDashboard extends Component {
 
    componentDidMount() {
       this.props.getLeaves()
@@ -30,7 +29,7 @@ class LeaveDashboard extends Component {
 
       const BoardAlgorithm = leaves => {
          const cards = leaves.map(leave => (
-            <LeaveCard key={leave.id} leave={leave} />
+            <AdminLeaveCard key={leave.id} leave={leave} />
          ))
 
          for (let i = 0; i < leaves.length; i++) {
@@ -44,13 +43,24 @@ class LeaveDashboard extends Component {
                rejectedLeaves.push(cards[i])
             }
          }
+
+         // if nothing in any column, "nothing here" is rendered instead
+         const nothing = <p key="nothing">Nothing here</p>
+         if (pendingLeaves.length === 0) {
+            console.log('nothing in pending column')
+            pendingLeaves.push(nothing)
+         }
+         if (approvedLeaves.length === 0) {
+            console.log('nothing in approved column')
+            approvedLeaves.push(nothing)
+         }
+         if (rejectedLeaves.length === 0) {
+            console.log('nothing in rejected column')
+            rejectedLeaves.push(nothing)
+         }
+
          return (
             <Col style={{ margin: '24px 24px 24px 24px' }}>
-               <Button type='primary' style={{ margin: '0 0 24px' }} >
-                  <Link to="/NewLeave">
-                     New leave
-                        </Link>
-               </Button>
                <Row gutter={16}>
                   <Col span={8}>
                      <Card title="Pending" >
@@ -93,4 +103,4 @@ const mapStateToProps = state => ({
 })
 
 //connect component to global state
-export default connect(mapStateToProps, { getLeaves })(LeaveDashboard)
+export default connect(mapStateToProps, { getLeaves })(AdminLeaveDashboard)

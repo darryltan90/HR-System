@@ -1,39 +1,20 @@
 import React, { Component } from 'react'
 import { Layout, Row, DatePicker, Col, Button, Form, Select } from 'antd';
 import moment from 'moment'
-import MenuHeader from '../../components/MenuHeader';
+import MenuHeader from '../../../components/MenuHeader';
 import TextArea from 'antd/lib/input/TextArea';
 import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addLeave, getLeave } from "../../actions/leavesActions";
+import { addLeave } from "../../../actions/leavesActions";
 import { compose } from 'redux';
 
 
-class UpdateLeave extends Component {
-   constructor() {
-      super()
-      this.state = {
-         id: '',
-         leaveType: '',
-         startDate: '',
-         endDate: '',
-         reason: '',
-         status: ''
-      }
-   }
-
-   componentDidMount() {
-      const { leave_id } = this.props.match.params
-      this.props.getLeave(leave_id)
-      //console.log("propsonly", this.props)
-   }
+class NewLeave extends Component {
 
    //when submit is clicked
    onSubmit = e => {
       e.preventDefault();
-
-      console.log('submit state: ', JSON.stringify(this.state))
 
       this.props.form.validateFields((err, fieldsValue) => {
          if (err) {
@@ -44,18 +25,20 @@ class UpdateLeave extends Component {
          // Should format date value before submit.
          const rangeValue = fieldsValue["range-picker"];
 
-         const updateLeave = {
-            "id": this.props.leave.leave.id,
+         const newLeave = {
+            //...fieldsValue,
+            "empName": 'darryl',
             "leaveType": fieldsValue['leave-type'],
+            //startDate: fieldsValue['range-picker'][0].format("YYYY-MM-DD")
             "startDate": rangeValue[0].format("YYYY-MM-DD"),
             "endDate": rangeValue[1].format("YYYY-MM-DD"),
             "reason": fieldsValue['reason'],
             "status": 'PENDING'
          };
 
-         console.log("Received values of form: ", updateLeave);
+         console.log("Received values of form: ", newLeave);
          //here will submit form
-         this.props.addLeave(updateLeave, this.props.history)
+         this.props.addLeave(newLeave, this.props.history)
       });
    };
 
@@ -66,35 +49,29 @@ class UpdateLeave extends Component {
 
    render() {
 
-      console.log("props: ", JSON.stringify(this.props))
-      console.log("state: ", JSON.stringify(this.state))
-
       //for layout
       const { Header, Content, Footer } = Layout;
 
       const { getFieldDecorator } = this.props.form;
 
-      // values from global state
-      const { leaveType, startDate, endDate, reason } = this.props.leave.leave
-
       // fieldDecorator options for Datepicker.Rangepicker
-      const dateFormat = 'YYYY-MM-DD';
       const rangePickerFieldDecorator = [{
-         rules: [{ type: "array", required: true, message: "Please select date!" }],
-         initialValue: [moment(startDate, dateFormat), moment(endDate, dateFormat)]
+         rules: [{ type: "array", required: true, message: "Please select date!" }]
       }];
 
       // fieldDecorator options for Select
       const leaveTypeFieldDecorator = [{
-         rules: [{ required: true, message: "Please select leave type!" }],
-         initialValue: leaveType
+         //initialValue: 'Medical',
+         rules: [{ required: true, message: "Please select leave type!" }]
       }]
 
       // fieldDecorator options for Select
       const reasonFieldDecorator = [{
          //rules: [{ required: true, message: "Please select leave type!" }],
-         initialValue: reason
+         //initialValue:
       }]
+
+      //const dateFormat = 'YYYY-MM-DD';
 
       return (
          <Layout>
@@ -108,7 +85,7 @@ class UpdateLeave extends Component {
                   <Form onSubmit={this.onSubmit}>
                      {/* -----------select menu----------- */}
                      <Form.Item>
-                        {getFieldDecorator("leave-type", ...leaveTypeFieldDecorator)(
+                        {getFieldDecorator("leave-type", { ...leaveTypeFieldDecorator })(
                            <Select
                               placeholder="Leave type"
                            //value={this.state.leaveType}
@@ -147,7 +124,7 @@ class UpdateLeave extends Component {
                      <Row type="flex" justify="space-around">
                         <Form.Item>
                            <Button type="danger" >
-                              <Link to="/">
+                              <Link to="/employee/leave/">
                                  Cancel
                               </Link>
                            </Button>
@@ -155,7 +132,7 @@ class UpdateLeave extends Component {
                         <Form.Item>
                            <Button type="primary" htmlType="submit">
                               Submit
-                        </Button>
+                           </Button>
                         </Form.Item>
                      </Row>
                   </Form>
@@ -167,17 +144,8 @@ class UpdateLeave extends Component {
    }
 }
 
-//functions and objects need for this componenet
-UpdateLeave.propTypes = {
-   leave: PropTypes.object.isRequired,
-   addLeave: PropTypes.func.isRequired,
-   getLeave: PropTypes.func.isRequired,
-   addLeave: PropTypes.func.isRequired,
+NewLeave.propTypes = {
+   addLeave: PropTypes.func.isRequired
 }
 
-//global state(redux), apply to local props
-const mapStateToProps = state => ({
-   leave: state.leave,
-})
-
-export default compose(connect(mapStateToProps, { getLeave, addLeave }), Form.create())(UpdateLeave)
+export default compose(connect(null, { addLeave }), Form.create())(NewLeave)

@@ -1,10 +1,10 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import { Card, Icon, Button } from 'antd'
 import Meta from 'antd/lib/card/Meta'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import { deleteLeave } from "../../../actions/leavesActions";
+import { deleteLeave } from "../../../../actions/leavesActions";
 
 class LeaveCard extends Component {
 
@@ -48,11 +48,20 @@ class LeaveCard extends Component {
          <Card
             style={{ width: 435, marginTop: 16 }}
             actions={[
-               <Icon type="delete" onClick={this.onDeleteClick.bind(this, id)} />
-               //deleteButton
+               <Icon
+                  type="delete"
+                  theme="twoTone"
+                  twoToneColor="red"
+                  onClick={this.onDeleteClick.bind(this, id)}
+                  style={{ fontSize: 'large' }}
+               />
                ,
-               <Link to={`updateLeave/${id}`}>
-                  <Icon type="edit" />
+               <Link to={`/employee/leave/updateLeave/${id}`}>
+                  <Icon
+                     type="edit"
+                     theme="twoTone"
+                     style={{ fontSize: 'large' }}
+                  />
                </Link>
             ]}
          >
