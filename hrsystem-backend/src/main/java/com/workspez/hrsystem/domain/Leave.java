@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +33,18 @@ public class Leave {
 	@Column(name = "status")
 	private String status;
 	
+	@JoinColumn(name = "emp_id")
+	@ManyToOne
+	private Employee employee;
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	public Leave() {}
 
 	public Long getId() {
@@ -81,6 +95,6 @@ public class Leave {
 		this.status = status;
 	}
 	
-	
+
 	
 }
