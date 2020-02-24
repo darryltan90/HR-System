@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 class MenuHeader extends Component {
 
    onLogoutClick = () => {
+
+      //this.props.authenticator.isLoggedIn = false
+
       return (
          <Link to="/" />
       )
