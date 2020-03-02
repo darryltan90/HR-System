@@ -1,10 +1,7 @@
 import { GET_ADMIN_ID, GET_EMP_ID, } from "../actions/types";
 
 const initialState = {
-   isLoggedIn={
-      admin = {},
-      employee = {}
-   }
+   empId: 1
 }
 
 // log in reducer

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.workspez.hrsystem.domain.Leave;
@@ -29,8 +30,9 @@ public class LeaveController {
 	@Autowired 
 	private LeaveService leaveService;
 	
-	@PostMapping("/add")//empty means using the same address as the top: "/leave"
-	public ResponseEntity<?> addLeaveToDashoard(@Valid @RequestBody Leave leave, BindingResult result){
+	//-------------------EMPLOYEE-------------------//
+	@PostMapping("/employee/add")//empty means using the same address as the top: "/hrsystemApi/leaves"
+	public ResponseEntity<?> addLeave(@Valid @RequestBody Leave leave, BindingResult result){
 		//<?> means generic data type
 		if (result.hasErrors()) { //to simplify the error code
 			Map<String, String> errorMap = new HashMap<>();
@@ -41,33 +43,58 @@ public class LeaveController {
 				errorMap.put(error.getField(), error.getDefaultMessage());
 				//field, default message from List<FieldError>
 			}
-			
 			return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
 		}
-		
 		Leave newLeave = leaveService.saveOrUpdateLeave(leave);
-		
 		return new ResponseEntity<Leave>(newLeave, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/allLeaves")
+	// (employee)gets leaves based on empId
+	@GetMapping("/employee/allLeaves")
+	public ResponseEntity<?> findAllLeavesByEmpId(@PathVariable int empId){
+		Leave leave = leaveService.findAllLeavesByEmpId(empId);
+		return new ResponseEntity<Leave>(leave, HttpStatus.OK);
+	}
+	
+	// (employee)gets specific leave based on leaveId and empId
+	@GetMapping("/employee/getLeave/{leaveId}")
+	public ResponseEntity<?> getLeaveDetailsByIdAndEmpId(@RequestParam int leaveId, @RequestParam int empId){
+		Leave leave = leaveService.findLeaveDetailsByIdAndEmpId(leaveId, empId);
+		return new ResponseEntity<Leave>(leave, HttpStatus.OK);
+	}
+	
+	// (employee)delete leave based on leaveId and empId
+	@DeleteMapping("/employee/deleteById/{leave_id}")
+	public ResponseEntity<?> delById(@RequestParam int leaveId, @RequestParam int empId){
+		leaveService.delete(leaveId, empId);
+		return new ResponseEntity<String>("Leave deleted", HttpStatus.OK);
+	}
+	
+	//-------------------ADMIN-------------------//
+	//(admin)updates the leave details based on the leave id
+	@PostMapping("/admin/add")//empty means using the same address as the top: "/hrsystemApi/leaves"
+	public ResponseEntity<?> updateLeave(@Valid @RequestBody Leave leave, BindingResult result){
+		//<?> means generic data type
+		if (result.hasErrors()) { //to simplify the error code
+			Map<String, String> errorMap = new HashMap<>();
+			// list above is for type FieldError
+			// used to display specific error
+			
+			for(FieldError error: result.getFieldErrors()) {
+				errorMap.put(error.getField(), error.getDefaultMessage());
+				//field, default message from List<FieldError>
+			}
+			return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
+		}
+		Leave newLeave = leaveService.saveOrUpdateLeave(leave);
+		return new ResponseEntity<Leave>(newLeave, HttpStatus.CREATED);
+	}
+	
+	// (admin)gets all leaves
+	@GetMapping("/admin/allLeaves")
 	public Iterable<Leave> getAllLeaves(){
 		return leaveService.findAll();
 	}
 	
-	@GetMapping("/get{leave_id}")
-	public ResponseEntity<?> getLeaveById(@PathVariable Long leave_id){
-		Leave leave = leaveService.findById(leave_id);
-		return new ResponseEntity<Leave>(leave, HttpStatus.OK);
-	}
-	
-	@DeleteMapping("/delete{leave_id}")
-	public ResponseEntity<?> delById(@PathVariable Long leave_id){
-		//ProjectTask projectTask = projectTaskService.findById(pt_id);
-		
-		leaveService.delete(leave_id);
-		
-		return new ResponseEntity<String>("Leave deleted", HttpStatus.OK);
-	}
 	
 }

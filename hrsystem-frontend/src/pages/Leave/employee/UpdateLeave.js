@@ -6,7 +6,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addLeave, getLeave } from "../../../actions/leavesActions";
+import { addLeave, getLeave } from "../../../actions/employeeLeavesActions";
 import { compose } from 'redux';
 
 
@@ -35,6 +35,7 @@ class UpdateLeave extends Component {
 
          const updateLeave = {
             "id": this.props.leave.leave.id,
+            "emp_id": this.props.emp_id,
             "leaveType": fieldsValue['leave-type'],
             "startDate": rangeValue[0].format("YYYY-MM-DD"),
             "endDate": rangeValue[1].format("YYYY-MM-DD"),

@@ -13,7 +13,6 @@ public class LeaveService {
 	private LeaveRepo leaveRepo;
 	
 	public Leave saveOrUpdateLeave(Leave leave) {
-		
 		return leaveRepo.save(leave);
 	}
 
@@ -21,14 +20,17 @@ public class LeaveService {
 		return leaveRepo.findAll();
 	}
 	
-	public Leave findById(Long id) {
-		return leaveRepo.getById(id);
+	public Leave findAllLeavesByEmpId(int empId) {
+		return leaveRepo.findAllLeavesByEmpId(empId);
 	}
 	
-	public void delete(Long id) {
-		Leave leave = findById(id);
+	public Leave findLeaveDetailsByIdAndEmpId(int id, int empId) {
+		return leaveRepo.findLeaveDetailsByIdAndEmpId(id, empId);
+	}
+	
+	public void delete(int id, int empId) {
+		Leave leave = findLeaveDetailsByIdAndEmpId(id, empId);
 		leaveRepo.delete(leave);
-		
 	}
 	
 }

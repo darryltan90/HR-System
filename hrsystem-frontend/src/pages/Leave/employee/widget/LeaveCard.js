@@ -4,28 +4,22 @@ import Meta from 'antd/lib/card/Meta'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import { deleteLeave } from "../../../../actions/leavesActions";
+import { deleteLeave } from "../../../../actions/employeeLeavesActions";
 
 class LeaveCard extends Component {
 
-   onDeleteClick(leave_id) {
-      this.props.deleteLeave(leave_id)
+   onDeleteClick = (leave_id, emp_id) => {
+      this.props.deleteLeave(leave_id, emp_id, "employee")
    }
 
-   test() { }
-
    actionMethod = () => {
-
    }
 
    render() {
-
       //leave defracturing
-      const { id, leaveType, startDate, endDate, reason, status } = this.props.leave
+      const { id, emp_id, leaveType, startDate, endDate, reason, status } = this.props.leave
       //const [buttonDisplay, setButtonDisplay] = useState('');
       console.log(JSON.stringify(status))
-
-
 
       if (status === 'APPROVED' || status === 'REJECTED') {
          //const deleteButton = <Icon type="delete" onClick={this.onDeleteClick.bind(this, id)} />
@@ -52,7 +46,9 @@ class LeaveCard extends Component {
                   type="delete"
                   theme="twoTone"
                   twoToneColor="red"
-                  onClick={this.onDeleteClick.bind(this, id)}
+                  //onClick={this.onDeleteClick}
+                  // onClick={this.onDeleteClick.bind(this, id)}
+                  onClick={this.onDeleteClick.bind(this, id, emp_id)}
                   style={{ fontSize: 'large' }}
                />
                ,

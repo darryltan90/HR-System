@@ -18,22 +18,21 @@ class App extends Component {
    }
 
    render() {
-
       //this.props.authenticator.isLoggedIn
       //const authenticator.isLoggedIn = false
 
-      const authenticator = {
-         isLoggedIn={
-            admin = {
-               id: 1,
-               name: 'darryl admin'
-            },
-            employee = {
-               id: 1,
-               name: 'darryl'
-            }
-         }
-      }
+      // const authenticator = {
+      //    isLoggedIn={
+      //       admin = {
+      //          id: 1,
+      //          name: 'darryl admin'
+      //       },
+      //       employee = {
+      //          id: 1,
+      //          name: 'darryl'
+      //       }
+      //    }
+      // }
 
       return (
          <Provider store={store}>
@@ -46,7 +45,8 @@ class App extends Component {
                   <Route exact path='/' component={Login} />
 
                   {/* employee pages */}
-                  <Route exact path='/employee/leave/' component={authenticator.isLoggedIn ? EmployeeLeaveDashboard : this.redirectToLogin} />
+                  {/* <Route exact path='/employee/leave/' component={authenticator.isLoggedIn ? EmployeeLeaveDashboard : this.redirectToLogin} /> */}
+                  <Route exact path='/employee/leave/' component={EmployeeLeaveDashboard} />
                   <Route exact path='/employee/leave/newLeave' component={NewLeave} />
                   <Route exact path='/employee/leave/updateLeave/:leave_id' component={UpdateLeave} />
 

@@ -6,7 +6,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addLeave } from "../../../actions/leavesActions";
+import { addLeave } from "../../../actions/employeeLeavesActions";
 import { compose } from 'redux';
 
 
@@ -26,14 +26,12 @@ class NewLeave extends Component {
          const rangeValue = fieldsValue["range-picker"];
 
          const newLeave = {
-            //...fieldsValue,
-            "empName": 'darryl',
+            "empId": '1',
             "leaveType": fieldsValue['leave-type'],
-            //startDate: fieldsValue['range-picker'][0].format("YYYY-MM-DD")
             "startDate": rangeValue[0].format("YYYY-MM-DD"),
             "endDate": rangeValue[1].format("YYYY-MM-DD"),
             "reason": fieldsValue['reason'],
-            "status": 'PENDING'
+            "status": 'PENDING' //do not change, initial value is always 'PENDING'
          };
 
          console.log("Received values of form: ", newLeave);
@@ -42,8 +40,8 @@ class NewLeave extends Component {
       });
    };
 
+   // Cannot select days before today and today
    disabledDate = (current) => {
-      // Cannot select days before today and today
       return current && current < moment().endOf('day');
    }
 
@@ -59,16 +57,15 @@ class NewLeave extends Component {
          rules: [{ type: "array", required: true, message: "Please select date!" }]
       }];
 
-      // fieldDecorator options for Select
+      // fieldDecorator options for Select(dropdown menu)
       const leaveTypeFieldDecorator = [{
          //initialValue: 'Medical',
          rules: [{ required: true, message: "Please select leave type!" }]
       }]
 
-      // fieldDecorator options for Select
+      // fieldDecorator options for TextArea
       const reasonFieldDecorator = [{
-         //rules: [{ required: true, message: "Please select leave type!" }],
-         //initialValue:
+         //empty because its needed
       }]
 
       //const dateFormat = 'YYYY-MM-DD';
@@ -102,8 +99,6 @@ class NewLeave extends Component {
                      <Form.Item>
                         {getFieldDecorator("range-picker", ...rangePickerFieldDecorator)(<DatePicker.RangePicker
                            disabledDate={this.disabledDate}
-                        //initialValue={[moment('2020-03-12', dateFormat), moment('2020-03-15', dateFormat)]}
-                        //format={dateFormat}
                         />)}
                      </Form.Item>
 

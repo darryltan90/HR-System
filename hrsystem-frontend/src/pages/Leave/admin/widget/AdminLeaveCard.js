@@ -9,27 +9,30 @@ class LeaveCard extends Component {
 
    onRejectClick = () => {
       const updateLeaveStatus = {
-         "id": this.props.leave.id,
-         "leaveType": this.props.leave.leaveType,
-         "startDate": this.props.leave.startDate,
-         "endDate": this.props.leave.endDate,
-         "reason": this.props.leave.reason,
+         // "id": this.props.leave.id,
+         // "empId": this.props.leave.empId,
+         // "leaveType": this.props.leave.leaveType,
+         // "startDate": this.props.leave.startDate,
+         // "endDate": this.props.leave.endDate,
+         // "reason": this.props.leave.reason,
+         ...this.props.leave, //should contain everything above
          "status": 'REJECTED'
       }
-
-      this.props.updateLeaveStatus(updateLeaveStatus, null)
-
+      console.log("updateLeaveStatus", updateLeaveStatus)
+      //this.props.updateLeaveStatus(updateLeaveStatus, null)
    }
 
    onApproveClick = () => {
       //console.log(this.props)
       //return
       const updateLeaveStatus = {
-         "id": this.props.leave.id,
-         "leaveType": this.props.leave.leaveType,
-         "startDate": this.props.leave.startDate,
-         "endDate": this.props.leave.endDate,
-         "reason": this.props.leave.reason,
+         // "id": this.props.leave.id,
+         // "empId": this.props.leave.empId,
+         // "leaveType": this.props.leave.leaveType,
+         // "startDate": this.props.leave.startDate,
+         // "endDate": this.props.leave.endDate,
+         // "reason": this.props.leave.reason,
+         ...this.props.leave,
          "status": 'APPROVED'
       }
 

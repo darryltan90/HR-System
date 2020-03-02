@@ -3,7 +3,7 @@ import AdminLeaveCard from './widget/AdminLeaveCard'
 import { Card, Layout, Row, Col, Button } from 'antd'
 import MenuHeader from '../../../components/MenuHeader'
 import { Link } from 'react-router-dom'
-import { getLeaves } from "../../../actions/leavesActions";
+import { getLeaves } from "../../../actions/employeeLeavesActions";
 import { connect } from 'react-redux'
 
 class AdminLeaveDashboard extends Component {
