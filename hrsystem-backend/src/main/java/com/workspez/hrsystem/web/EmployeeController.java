@@ -6,22 +6,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.workspez.hrsystem.domain.Employee;
 import com.workspez.hrsystem.service.EmployeeService;
 
 @RestController
-@RequestMapping("/hrsytemApi/employees")
+@RequestMapping("/hrsystemApi/authenticator")
 @CrossOrigin
 public class EmployeeController {
 	
 	@Autowired EmployeeService employeeService;
 	
-	@GetMapping("/login{email}")
-	public ResponseEntity<?> findDetailsByEmail(@PathVariable String email){
-		Employee employee = employeeService.findByEmail(email);
+	@PostMapping("/login")
+	public ResponseEntity<?> findEmpDetailsByName(@RequestParam(name="empName") String empName){
+		Employee employee = employeeService.findEmpDetailsByName(empName);
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 

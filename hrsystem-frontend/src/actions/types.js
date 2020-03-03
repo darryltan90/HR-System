@@ -16,6 +16,6 @@ export const POST = "POST";
 //ADMIN ACTIONS
 //export const UPDATE_LEAVE_STATUS = 'UPDATE_LEAVE_STATUS';
 
-//authentication
-export const GET_EMP_ID = "GET_EMP_ID";
-export const GET_ADMIN_ID = "GET_ADMIN_ID";
+//AITHENTICATION ACTIONS
+export const GET_EMP_DETAILS = "GET_EMP_DETAILS";
+export const GET_ADMIN_DETAILS = "GET_ADMIN_DETAILS";

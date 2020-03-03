@@ -6,7 +6,7 @@ import EmployeeLeaveDashboard from './pages/Leave/employee/EmployeeLeaveDashboar
 import { Provider } from "react-redux";
 import store from './store'
 import UpdateLeave from './pages/Leave/employee/UpdateLeave';
-import Login from './pages/login/login';
+import Login from './pages/login/Login';
 import AdminLeaveDashboard from './pages/Leave/admin/AdminLeaveDashboard';
 
 class App extends Component {

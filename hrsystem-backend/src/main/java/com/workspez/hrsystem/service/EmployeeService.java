@@ -11,8 +11,8 @@ public class EmployeeService {
 	
 	@Autowired EmployeeRepo employeeRepo;
 	
-	public Employee findByEmail(String email) {
-		return employeeRepo.findByEmail(email);
+	public Employee findEmpDetailsByName(String empName) {
+		return employeeRepo.findEmpDetailsByName(empName);
 	}
 
 }

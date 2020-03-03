@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 class EmployeeLeaveDashboard extends Component {
 
    componentDidMount() {
+      console.log(JSON.stringify(this.props))
       this.props.getLeaves()
    }
 

@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 import { Menu, Row, Icon, Button, Col, Popconfirm } from 'antd'
 import logo from './../images/workspez_logo.png'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { resetEmptDetails } from '../actions/authenticatorActions'
 
 class MenuHeader extends Component {
 
-   onLogoutClick = () => {
-
-      //this.props.authenticator.isLoggedIn = false
-
-      return (
-         <Link to="/" />
-      )
+   resetLoginDetail = e => {
+      e.preventDefault()
+      resetEmptDetails()
    }
-
    render() {
+      //const dispatch = useDispatch()
+      //const resetAuth = { auth: { employee: {}, admin: {} } }
       return (
          //total 24 cols, 3(logo)+5(menu)+15+1(logout icon)
          <Row type="flex">
@@ -36,9 +35,10 @@ class MenuHeader extends Component {
                <Popconfirm
                   title={"Are you sure you want to log out?"}
                   placement="bottomRight"
-                  //onConfirm={this.onLogoutClick}
-                  okText={<Link to="/">Yes</Link>}
+                  //okText={this.onLogoutClick}
+                  okText={<Link to='/'>Yes</Link>}
                   cancelText='No'
+                  onConfirm={this.resetLoginDetail}
                >
                   <Icon
                      type="logout"

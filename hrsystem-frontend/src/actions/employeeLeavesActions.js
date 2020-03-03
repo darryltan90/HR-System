@@ -41,7 +41,7 @@ export const deleteLeave = (leaveId, empId, userType) => async dispatch => {
          type: DELETE_LEAVE,
          payload: payloadObj
       })
-      alert(deleteById);
+      //alert(deleteById);
 
       // return await axios({
       //    url: 'http://localhost:8080/hrsystemApi/leaves/employee/deleteLeave' + leaveId,
