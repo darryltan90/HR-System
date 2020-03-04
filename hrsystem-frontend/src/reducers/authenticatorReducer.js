@@ -1,4 +1,4 @@
-import { GET_ADMIN_DETAILS, GET_EMP_DETAILS } from "../actions/types";
+import { GET_ADMIN_DETAILS, GET_EMP_DETAILS, USER_LOGOUT } from "../actions/types";
 
 const initialState = {
    employee: {},
@@ -14,12 +14,18 @@ export default function (state = initialState, action) {
             admin: action.payload
          }
       case GET_EMP_DETAILS:
-         console.log('action :: ', action)
+         console.log('GET_EMP_DETAILS action :: ', action)
          return {
             ...state,
             employee: action.payload
          }
 
+      case USER_LOGOUT:
+         console.log('USER_LOGOUT action:: ', action)
+         return {
+            employee: {},
+            admin: {}
+         }
       default:
          return state
    }

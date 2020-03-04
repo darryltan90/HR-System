@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
-import { Menu, Row, Icon, Button, Col, Popconfirm } from 'antd'
+import { Menu, Row, Icon, Col, Popconfirm } from 'antd'
 import logo from './../images/workspez_logo.png'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { resetReduxStore } from '../actions/authenticatorActions'
+import { compose } from 'redux'
 
 class MenuHeader extends Component {
 
    resetLoginDetail = e => {
       e.preventDefault()
-      resetReduxStore()
+      this.props.resetReduxStore()
+
    }
    render() {
       //const dispatch = useDispatch()
@@ -18,7 +20,7 @@ class MenuHeader extends Component {
          //total 24 cols, 3(logo)+5(menu)+15+1(logout icon)
          <Row type="flex">
             <Col span={3}>
-               <img src={logo} width='150' height='50' />
+               <img src={logo} alt="workspez logo" width='150' height='50' />
             </Col>
             <Col span={5}>
                <Menu
@@ -51,4 +53,4 @@ class MenuHeader extends Component {
    }
 }
 
-export default MenuHeader
+export default compose(connect(null, { resetReduxStore }))(MenuHeader)

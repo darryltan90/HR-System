@@ -12,7 +12,7 @@ public interface LeaveRepo extends JpaRepository<Leave, Long>{
 
 	// find all leaves by employee id
 	@Query(value = " SELECT * FROM leaves WHERE emp_id =:empId", nativeQuery = true)
-	Leave findAllLeavesByEmpId(@Param("empId") int empId);
+	Iterable<Leave> findAllLeavesByEmpId(@Param("empId") int empId);
 	
 	// find specific leave by id and employee id
 	@Query(value = " SELECT * FROM leaves WHERE id =:id AND emp_id =:empId", nativeQuery = true)

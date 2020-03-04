@@ -1,4 +1,4 @@
-import { GET_LEAVES, DELETE_LEAVE, GET_LEAVE, POST } from "../actions/types";
+import { GET_LEAVES, DELETE_LEAVE, GET_LEAVE, POST, USER_LOGOUT } from "../actions/types";
 
 const initialState = {
    leaves: [],
@@ -28,8 +28,13 @@ export default function (state = initialState, action) {
          }
 
       case POST:
-         console.log('action : ', action)
+         console.log('POST action:: ', action)
          return { ...state, leaves: [...state.leaves.filter(item => item.id !== action.payload.id), action.payload] }
+
+      case USER_LOGOUT:
+         return {
+            ...initialState
+         }
 
       default:
          return state

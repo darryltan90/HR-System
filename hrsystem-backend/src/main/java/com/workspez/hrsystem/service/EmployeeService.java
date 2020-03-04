@@ -14,5 +14,9 @@ public class EmployeeService {
 	public Employee findEmpDetailsByName(String empName) {
 		return employeeRepo.findEmpDetailsByName(empName);
 	}
+	
+	public Employee findEmpDetailsById(int empId) {
+		return employeeRepo.findEmpDetailsById(empId);
+	}
 
 }

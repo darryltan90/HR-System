@@ -9,14 +9,13 @@ import { connect } from 'react-redux'
 class EmployeeLeaveDashboard extends Component {
 
    componentDidMount() {
-      console.log(JSON.stringify(this.props.auth))
+      console.log("EmployeeLeaveDashboard this.props.auth:: ", JSON.stringify(this.props.auth))
       this.props.getEmpLeaves(this.props.auth.empId)
-      //back end change return type to return all leaves, not only specific 1 leave
    }
 
    render() {
 
-      const { Header, Content, Footer } = Layout;
+      const { Header, Content, /*Footer*/ } = Layout;
 
       const { leaves } = this.props.leaves
 
@@ -31,7 +30,7 @@ class EmployeeLeaveDashboard extends Component {
 
       const BoardAlgorithm = leaves => {
          const cards = leaves.map(leave => (
-            <LeaveCard key={leave.id} leave={leave} />
+            <LeaveCard key={leave.id} leave={leave} empId={leave.empId} />
          ))
 
          for (let i = 0; i < leaves.length; i++) {
@@ -45,6 +44,22 @@ class EmployeeLeaveDashboard extends Component {
                rejectedLeaves.push(cards[i])
             }
          }
+
+         // if nothing in any column, "nothing here" is rendered instead
+         const nothing = <p key="nothing">Nothing here</p>
+         if (pendingLeaves.length === 0) {
+            console.log('nothing in pending column')
+            pendingLeaves.push(nothing)
+         }
+         if (approvedLeaves.length === 0) {
+            console.log('nothing in approved column')
+            approvedLeaves.push(nothing)
+         }
+         if (rejectedLeaves.length === 0) {
+            console.log('nothing in rejected column')
+            rejectedLeaves.push(nothing)
+         }
+
          return (
             <Col style={{ margin: '24px 24px 24px 24px' }}>
                <Button type='primary' style={{ margin: '0 0 24px' }} >

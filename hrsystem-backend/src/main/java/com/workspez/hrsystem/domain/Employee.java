@@ -14,7 +14,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "emp_id")
-	private Long empId;
+	private int empId;
 	
 	@Column(name = "emp_name")
 	private String empName;
@@ -25,11 +25,11 @@ public class Employee {
 	@Column(name = "password")
 	private String password;
 
-	public Long getEmpId() {
+	public int getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(Long empId) {
+	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
 

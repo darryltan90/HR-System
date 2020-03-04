@@ -20,7 +20,7 @@ public class LeaveService {
 		return leaveRepo.findAll();
 	}
 	
-	public Leave findAllLeavesByEmpId(int empId) {
+	public Iterable<Leave> findAllLeavesByEmpId(int empId) {
 		return leaveRepo.findAllLeavesByEmpId(empId);
 	}
 	

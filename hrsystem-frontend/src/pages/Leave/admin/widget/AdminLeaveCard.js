@@ -18,13 +18,11 @@ class LeaveCard extends Component {
          ...this.props.leave, //should contain everything above
          "status": 'REJECTED'
       }
-      console.log("updateLeaveStatus", updateLeaveStatus)
+      console.log("updateLeaveStatus data(check for empId):: ", updateLeaveStatus)
       //this.props.updateLeaveStatus(updateLeaveStatus, null)
    }
 
    onApproveClick = () => {
-      //console.log(this.props)
-      //return
       const updateLeaveStatus = {
          // "id": this.props.leave.id,
          // "empId": this.props.leave.empId,
@@ -36,15 +34,16 @@ class LeaveCard extends Component {
          "status": 'APPROVED'
       }
 
-      this.props.updateLeaveStatus(updateLeaveStatus)
+      console.log("updateLeaveStatus(check for empId):: ", updateLeaveStatus)
+      //this.props.updateLeaveStatus(updateLeaveStatus)
 
    }
 
    render() {
       //leave defracturing
-      const { id, leaveType, startDate, endDate, reason, status } = this.props.leave
+      const { /*id,*/ leaveType, startDate, endDate, reason, status, employee } = this.props.leave
 
-      console.log(JSON.stringify(status))
+      console.log("AdminLeaveCard status:: ", JSON.stringify(this.props.leave))
 
 
 
@@ -55,7 +54,7 @@ class LeaveCard extends Component {
                style={{ width: 435, marginTop: 16 }}
             >
                <Meta
-                  title={`${leaveType} - (employee name here)`}
+                  title={`${leaveType} - ${employee.empName}`}
                   description={`${startDate} - ${endDate}`}
                />
                <p>
@@ -70,7 +69,7 @@ class LeaveCard extends Component {
             style={{ width: 435, marginTop: 16 }}
             actions={[
                <Popconfirm
-                  title={`Reject ${leaveType} leave requested by (employee name here)?`}
+                  title={`Reject ${leaveType} leave requested by ${employee.empName}?`}
                   onConfirm={this.onRejectClick}
                   okText='Yes'
                   cancelText='No'
@@ -79,7 +78,7 @@ class LeaveCard extends Component {
                </Popconfirm>
                ,
                <Popconfirm
-                  title={`Approve ${leaveType} leave requested by (employee name here)?`}
+                  title={`Approve ${leaveType} leave requested by ${employee.empName}?`}
                   onConfirm={this.onApproveClick}
                   okText='Yes'
                   cancelText='No'
@@ -89,7 +88,7 @@ class LeaveCard extends Component {
             ]}
          >
             <Meta
-               title={`${leaveType} - (employee name here)`}
+               title={`${leaveType} - ${employee.empName}`}
                description={`${startDate} - ${endDate}`}
             />
             <p>

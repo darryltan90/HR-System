@@ -14,15 +14,17 @@ class UpdateLeave extends Component {
 
    componentDidMount() {
       const { leave_id } = this.props.match.params
-      this.props.getLeave(leave_id)
-      //console.log("propsonly", this.props)
+      const { empId } = this.props.auth
+      //console.log(this.props.match)
+      this.props.getLeave(empId, leave_id, this.props.history)
+      //console.log("this.props.auth", this.props.auth)
    }
 
    //when submit is clicked
    onSubmit = e => {
       e.preventDefault();
 
-      console.log('submit state: ', JSON.stringify(this.state))
+      console.log('onSubmit this.state::: ', JSON.stringify(this.state))
 
       this.props.form.validateFields((err, fieldsValue) => {
          if (err) {
@@ -35,7 +37,7 @@ class UpdateLeave extends Component {
 
          const updateLeave = {
             "id": this.props.leave.leave.id,
-            "emp_id": this.props.emp_id,
+            "employee": this.props.auth,
             "leaveType": fieldsValue['leave-type'],
             "startDate": rangeValue[0].format("YYYY-MM-DD"),
             "endDate": rangeValue[1].format("YYYY-MM-DD"),
@@ -56,11 +58,11 @@ class UpdateLeave extends Component {
 
    render() {
 
-      console.log("props: ", JSON.stringify(this.props))
-      console.log("state: ", JSON.stringify(this.state))
+      console.log("UpdateLeave this.props: ", JSON.stringify(this.props))
+      console.log("UpdateLeave this.state: ", JSON.stringify(this.state))
 
       //for layout
-      const { Header, Content, Footer } = Layout;
+      const { Header, Content, /*Footer*/ } = Layout;
 
       const { getFieldDecorator } = this.props.form;
 
@@ -156,16 +158,16 @@ class UpdateLeave extends Component {
    }
 }
 
-//functions and objects need for this componenet
+//functions and objects need for this component
 UpdateLeave.propTypes = {
    leave: PropTypes.object.isRequired,
    addLeave: PropTypes.func.isRequired,
    getLeave: PropTypes.func.isRequired,
-   addLeave: PropTypes.func.isRequired,
 }
 
 //global state(redux), apply to local props
 const mapStateToProps = state => ({
+   auth: state.auth.employee,
    leave: state.leave,
 })
 

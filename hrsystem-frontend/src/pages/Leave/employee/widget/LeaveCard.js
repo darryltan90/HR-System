@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Icon, Button } from 'antd'
+import { Card, Icon, Popconfirm } from 'antd'
 import Meta from 'antd/lib/card/Meta'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
@@ -8,32 +8,26 @@ import { deleteLeave } from "../../../../actions/employeeLeavesActions";
 
 class LeaveCard extends Component {
 
-   onDeleteClick = (leave_id, emp_id) => {
-      this.props.deleteLeave(leave_id, emp_id, "employee")
-   }
-
-   actionMethod = () => {
+   onDeleteClick = (leaveId, empId) => {
+      console.log("leaveId:: ", leaveId)
+      console.log("empId:: ", empId)
+      this.props.deleteLeave(leaveId, empId, "employee")
    }
 
    render() {
       //leave defracturing
-      const { id, emp_id, leaveType, startDate, endDate, reason, status } = this.props.leave
-      //const [buttonDisplay, setButtonDisplay] = useState('');
-      console.log(JSON.stringify(status))
+      const { id, leaveType, startDate, endDate, reason, status, employee } = this.props.leave
+      console.log("LeaveCard status::: ", JSON.stringify(status))
+      console.log("LeaveCard empId::: ", employee.empId)
 
       if (status === 'APPROVED' || status === 'REJECTED') {
-         //const deleteButton = <Icon type="delete" onClick={this.onDeleteClick.bind(this, id)} />
          return (
-            <Card
-               style={{ width: 435, marginTop: 16 }}
-            >
+            <Card style={{ width: 435, marginTop: 16 }}>
                <Meta
                   title={leaveType}
                   description={`${startDate} - ${endDate}`}
                />
-               <p>
-                  {reason}
-               </p>
+               <p>{reason}</p>
             </Card>
          )
       }
@@ -42,15 +36,23 @@ class LeaveCard extends Component {
          <Card
             style={{ width: 435, marginTop: 16 }}
             actions={[
-               <Icon
-                  type="delete"
-                  theme="twoTone"
-                  twoToneColor="red"
-                  //onClick={this.onDeleteClick}
-                  // onClick={this.onDeleteClick.bind(this, id)}
-                  onClick={this.onDeleteClick.bind(this, id, emp_id)}
-                  style={{ fontSize: 'large' }}
-               />
+               <Popconfirm
+                  title={"Are you sure you want to delete this leave?"}
+                  placement="bottomLeft"
+                  okText="Yes"
+                  cancelText="No"
+                  onConfirm={this.onDeleteClick.bind(this, id, employee.empId)}
+               >
+                  <Icon
+                     type="delete"
+                     theme="twoTone"
+                     twoToneColor="red"
+                     //onClick={this.onDeleteClick}
+                     // onClick={this.onDeleteClick.bind(this, id)}
+                     //onClick={this.onDeleteClick.bind(this, id, employee.empId)}
+                     style={{ fontSize: 'large' }}
+                  />
+               </Popconfirm>
                ,
                <Link to={`/employee/leave/updateLeave/${id}`}>
                   <Icon

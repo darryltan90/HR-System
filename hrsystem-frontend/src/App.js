@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { render } from '@testing-library/react';
+//import { render } from '@testing-library/react';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import NewLeave from './pages/Leave/employee/NewLeave';
 import EmployeeLeaveDashboard from './pages/Leave/employee/EmployeeLeaveDashboard';
@@ -18,29 +18,10 @@ class App extends Component {
    }
 
    render() {
-      //this.props.authenticator.isLoggedIn
-      //const authenticator.isLoggedIn = false
-
-      // const authenticator = {
-      //    isLoggedIn={
-      //       admin = {
-      //          id: 1,
-      //          name: 'darryl admin'
-      //       },
-      //       employee = {
-      //          id: 1,
-      //          name: 'darryl'
-      //       }
-      //    }
-      // }
-
       return (
          <Provider store={store}>
             <Router>
                <div>
-                  {/* this.props.authenticator.isLoggedIn */}
-                  {/* <Route exact path='/employee/leave/' component={authenticator.isLoggedIn ? EmployeeLeaveDashboard : this.redirectToLogin} /> */}
-
                   {/* Log in page */}
                   <Route exact path='/' component={Login} />
 

@@ -5,8 +5,9 @@ import { DELETE_LEAVE, GET_LEAVES, GET_LEAVE, POST } from "./types";
 //Add new leave---------------------------------------------------------
 export const addLeave = (leave, history) => async dispatch => {
    //try {
+   console.log("addLeave leave:: ", leave)
    const res = await axios.post("http://localhost:8080/hrsystemApi/leaves/employee/add", leave)
-   console.log('res :: ', res)
+   console.log('addLeave res:: ', res)
    dispatch({ type: POST, payload: res.data });
 
    if (history) {
@@ -34,40 +35,26 @@ export const getEmpLeaves = (empId) => async dispatch => {
 
 //Delete leave----------------------------------------------------------
 export const deleteLeave = (leaveId, empId, userType) => async dispatch => {
-
-   let payloadObj = {
-      leaveId: leaveId,
-      empId: empId
-   };
-
-   if (
-      window.confirm(
-         `You are deleting leave ${leaveId}, this action cannot be undone`
-      )
-   ) {
-      await axios.delete(`http://localhost:8080/hrsystemApi/leaves/${userType}/deleteById/${leaveId}`)//delete by id
-      dispatch({
-         type: DELETE_LEAVE,
-         payload: payloadObj
-      })
-      //alert(deleteById);
-
-      // return await axios({
-      //    url: 'http://localhost:8080/hrsystemApi/leaves/employee/deleteLeave' + leaveId,
-      //    method: 'DELETE'
-      // })
-   }
+   await axios.delete(`http://localhost:8080/hrsystemApi/leaves/${userType}/deleteById/${empId}/${leaveId}`)//delete by id
+   dispatch({
+      type: DELETE_LEAVE,
+      payload: leaveId
+   })
 }
 
 //Update leave----------------------------------------------------------
-export const getLeave = (leaveId, history) => async dispatch => {
+export const getLeave = (empId, leaveId, history) => async dispatch => {
+   console.log("empId::: ", empId)
+   console.log("leaveId::: ", leaveId)
    try {
-      const res = await axios.get(`http://localhost:8080/hrsystemApi/leaves/${leaveId}`)//get by id
+      const res = await axios.get(`http://localhost:8080/hrsystemApi/leaves/employee/getLeave/${empId}/${leaveId}`)
       dispatch({
          type: GET_LEAVE,
          payload: res.data
       })
+      console.log("getLeave res::: ", res)
    } catch (error) {
-      history.push("/")
+      //history.push("/")
+      console.log(error)
    }
 }

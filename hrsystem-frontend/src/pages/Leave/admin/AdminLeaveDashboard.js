@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import AdminLeaveCard from './widget/AdminLeaveCard'
-import { Card, Layout, Row, Col, Button } from 'antd'
+import { Card, Layout, Row, Col } from 'antd'
 import MenuHeader from '../../../components/MenuHeader'
-import { Link } from 'react-router-dom'
 import { getLeaves } from "../../../actions/employeeLeavesActions";
 import { connect } from 'react-redux'
 
@@ -14,7 +13,7 @@ class AdminLeaveDashboard extends Component {
 
    render() {
 
-      const { Header, Content, Footer } = Layout;
+      const { Header, Content, /*Footer*/ } = Layout;
 
       const { leaves } = this.props.leaves
 

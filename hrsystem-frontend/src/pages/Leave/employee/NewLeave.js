@@ -22,11 +22,12 @@ class NewLeave extends Component {
             return;
          }
 
+         console.log("NewLeave this.props.auth", this.props.auth)
          // Should format date value before submit.
          const rangeValue = fieldsValue["range-picker"];
 
          const newLeave = {
-            "empId": '1',
+            "employee": this.props.auth,
             "leaveType": fieldsValue['leave-type'],
             "startDate": rangeValue[0].format("YYYY-MM-DD"),
             "endDate": rangeValue[1].format("YYYY-MM-DD"),
@@ -47,8 +48,10 @@ class NewLeave extends Component {
 
    render() {
 
+      console.log("NewLeave this.props.auth:: ", this.props.auth)
+
       //for layout
-      const { Header, Content, Footer } = Layout;
+      const { Header, Content, /*Footer*/ } = Layout;
 
       const { getFieldDecorator } = this.props.form;
 
@@ -143,4 +146,9 @@ NewLeave.propTypes = {
    addLeave: PropTypes.func.isRequired
 }
 
-export default compose(connect(null, { addLeave }), Form.create())(NewLeave)
+//global state(redux), apply to local props
+const mapStateToProps = state => ({
+   auth: state.auth.employee,
+})
+
+export default compose(connect(mapStateToProps, { addLeave }), Form.create())(NewLeave)

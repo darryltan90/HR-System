@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ADMIN_DETAILS, GET_EMP_DETAILS } from "./types";
+import { /*GET_ADMIN_DETAILS,*/ GET_EMP_DETAILS, USER_LOGOUT } from "./types";
 
 export const getEmpDetails = (empName, history) => async dispatch => {
    try {
@@ -10,9 +10,7 @@ export const getEmpDetails = (empName, history) => async dispatch => {
          `http://localhost:8080/hrsystemApi/authenticator/login`, formData
       )
       //dispatch is to send to redux
-      if (history && res.data != "") {
-         console.log("test1")
-         //debugger;
+      if (history && res.data !== "") {
          dispatch({
             type: GET_EMP_DETAILS,
             payload: res.data
@@ -28,15 +26,5 @@ export const getEmpDetails = (empName, history) => async dispatch => {
 
 }
 export const resetReduxStore = () => dispatch => {
-   dispatch({ type: GET_EMP_DETAILS, payload: { employee: {}, admin: {} } })
+   dispatch({ type: USER_LOGOUT })
 }
-
-// export const resetReduxStore = () => {
-//    return dispatch => {
-//       return (
-//          dispatch({ type: GET_EMP_DETAILS, payload: {} }),
-//          dispatch({ type: GET_ADMIN_DETAILS, payload: {} })
-//       )
-
-//    }
-// }

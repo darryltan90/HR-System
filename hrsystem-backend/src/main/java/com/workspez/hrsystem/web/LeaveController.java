@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.workspez.hrsystem.domain.Employee;
 import com.workspez.hrsystem.domain.Leave;
+import com.workspez.hrsystem.service.EmployeeService;
 import com.workspez.hrsystem.service.LeaveService;
 
 @RestController
@@ -29,6 +31,7 @@ import com.workspez.hrsystem.service.LeaveService;
 public class LeaveController {
 	@Autowired 
 	private LeaveService leaveService;
+
 	
 	//-------------------EMPLOYEE-------------------//
 	@PostMapping("/employee/add")//empty means using the same address as the top: "/hrsystemApi/leaves"
@@ -49,23 +52,22 @@ public class LeaveController {
 		return new ResponseEntity<Leave>(newLeave, HttpStatus.CREATED);
 	}
 	
-	// (employee)gets leaves based on empId
-	@GetMapping("/employee/allLeaves")
-	public ResponseEntity<?> findAllLeavesByEmpId(@PathVariable int empId){
-		Leave leave = leaveService.findAllLeavesByEmpId(empId);
-		return new ResponseEntity<Leave>(leave, HttpStatus.OK);
+	// (employee)gets all leaves based on empId
+	@GetMapping("/employee/allLeaves/{empId}")
+	public Iterable<Leave> findAllLeavesByEmpId(@PathVariable int empId){
+		return leaveService.findAllLeavesByEmpId(empId);
 	}
 	
 	// (employee)gets specific leave based on leaveId and empId
-	@GetMapping("/employee/getLeave/{leaveId}")
-	public ResponseEntity<?> getLeaveDetailsByIdAndEmpId(@RequestParam int leaveId, @RequestParam int empId){
+	@GetMapping("/employee/getLeave/{empId}/{leaveId}")
+	public ResponseEntity<?> getLeaveDetailsByIdAndEmpId(@PathVariable int leaveId, @PathVariable int empId){
 		Leave leave = leaveService.findLeaveDetailsByIdAndEmpId(leaveId, empId);
 		return new ResponseEntity<Leave>(leave, HttpStatus.OK);
-	}
+	}	
 	
 	// (employee)delete leave based on leaveId and empId
-	@DeleteMapping("/employee/deleteById/{leave_id}")
-	public ResponseEntity<?> delById(@RequestParam int leaveId, @RequestParam int empId){
+	@DeleteMapping("/employee/deleteById/{empId}/{leaveId}")
+	public ResponseEntity<?> delById(@PathVariable int leaveId, @PathVariable int empId){
 		leaveService.delete(leaveId, empId);
 		return new ResponseEntity<String>("Leave deleted", HttpStatus.OK);
 	}
