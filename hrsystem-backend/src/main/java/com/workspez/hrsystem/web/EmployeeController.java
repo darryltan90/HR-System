@@ -22,8 +22,8 @@ public class EmployeeController {
 	@Autowired EmployeeService employeeService;
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> findEmpDetailsByName(@RequestParam(name="empName") String empName){
-		Employee employee = employeeService.findEmpDetailsByName(empName);
+	public ResponseEntity<?> findEmpDetailsByName(@RequestParam(name="empName") String empName, @RequestParam(name="password") String password){
+		Employee employee = employeeService.findEmpDetailsByNameAndPassword(empName, password);
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 

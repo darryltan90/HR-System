@@ -21,7 +21,7 @@ class Login extends Component {
          }
 
          //get employee leaves based on empId
-         this.props.getEmpDetails(fieldsValue["username"], this.props.history)
+         this.props.getEmpDetails(fieldsValue["username"], fieldsValue["password"], this.props.history)
       })
    }
 
@@ -34,6 +34,10 @@ class Login extends Component {
          rules: [{ required: true, message: "Please enter username!" }]
       }]
 
+      const passwordFieldDecorator = [{
+         rules: [{ required: true, message: "Please enter password!" }]
+      }]
+
       return (
          <Layout>
             <Layout.Content>
@@ -41,22 +45,26 @@ class Login extends Component {
                   <img src={logo} alt="workspez logo" width='300' height='100' style={{ margin: '0 0 24px' }} />
                   <Row type="flex" justify="space-around">
                      <Form onSubmit={this.onSubmit}>
+                        Username
                         <Form.Item>
                            {getFieldDecorator("username", ...usernameFieldDecorator)(
                               <Input placeholder="Username" />
                            )}
                         </Form.Item>
+                        Password
                         <Form.Item>
-                           <Button type="primary" htmlType="submit">
-                              Submit
-                        </Button>
+                           {getFieldDecorator("password", ...passwordFieldDecorator)(
+                              <Input.Password placeholder="password" />
+                           )}
+                        </Form.Item>
+                        <Form.Item>
+                           <Row type="flex" justify="space-around">
+                              <Button type="primary" htmlType="submit">
+                                 Login
+                           </Button>
+                           </Row>
                         </Form.Item>
                      </Form>
-                     <Button>
-                        <Link to='employee/leave'>
-                           Employee(no login)
-                        </Link>
-                     </Button>
                      <Button>
                         <Link to='admin/leave'>
                            Admin(no login)

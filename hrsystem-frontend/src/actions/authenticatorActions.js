@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { /*GET_ADMIN_DETAILS,*/ GET_EMP_DETAILS, USER_LOGOUT } from "./types";
 
-export const getEmpDetails = (empName, history) => async dispatch => {
+export const getEmpDetails = (empName, password, history) => async dispatch => {
    try {
 
       const formData = new FormData()
       formData.append("empName", empName)
+      formData.append("password", password)
       const res = await axios.post(
          `http://localhost:8080/hrsystemApi/authenticator/login`, formData
       )
