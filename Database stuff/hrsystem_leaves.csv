@@ -1,0 +1,16 @@
+id,emp_id,leave_type,start_date,end_date,reason,status
+2,1,Medical,2020-02-24,2020-02-25,"test medical pending updated",REJECTED
+3,1,Unpaid,2020-03-01,2020-03-05,"test unpaid approved",APPROVED
+4,2,Annual,2020-04-25,2020-04-26,"test annual rejected",REJECTED
+6,2,Medical,2020-02-26,2020-02-26,"medical 26/2 to 26/2
+next line",REJECTED
+9,1,Medical,2020-02-19,2020-02-27,"etst medical 02-19 02-27",REJECTED
+10,2,Medical,2020-02-26,2020-02-27,NULL,APPROVED
+11,2,Annual,2020-02-20,2020-02-28,ddd,APPROVED
+12,1,Unpaid,2020-02-22,2020-02-29,NULL,APPROVED
+13,1,Annual,2020-02-20,2020-02-27,NULL,APPROVED
+14,1,Medical,2020-02-27,2020-02-28,NULL,APPROVED
+15,2,Unpaid,2020-02-27,2020-02-29,j,APPROVED
+22,2,Medical,2020-03-23,2020-03-26,"empId 2 eunbi",PENDING
+24,1,Medical,2020-03-05,2020-03-07,"too sleepy",PENDING
+25,2,Unpaid,2020-03-05,2020-03-07,"go school",PENDING
