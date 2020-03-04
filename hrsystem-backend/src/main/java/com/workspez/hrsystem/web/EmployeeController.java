@@ -26,5 +26,4 @@ public class EmployeeController {
 		Employee employee = employeeService.findEmpDetailsByNameAndPassword(empName, password);
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
-
 }

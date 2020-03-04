@@ -3,6 +3,8 @@ import { /*GET_ADMIN_DETAILS,*/ GET_EMP_DETAILS, USER_LOGOUT } from "./types";
 
 export const getEmpDetails = (empName, password, history) => async dispatch => {
    try {
+      console.log("empName:: ", empName)
+      console.log("password:: ", password)
 
       const formData = new FormData()
       formData.append("empName", empName)
