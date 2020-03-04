@@ -3,13 +3,13 @@ import { Menu, Row, Icon, Button, Col, Popconfirm } from 'antd'
 import logo from './../images/workspez_logo.png'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { resetEmptDetails } from '../actions/authenticatorActions'
+import { resetReduxStore } from '../actions/authenticatorActions'
 
 class MenuHeader extends Component {
 
    resetLoginDetail = e => {
       e.preventDefault()
-      resetEmptDetails()
+      resetReduxStore()
    }
    render() {
       //const dispatch = useDispatch()

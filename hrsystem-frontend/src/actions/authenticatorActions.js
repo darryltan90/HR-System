@@ -17,7 +17,7 @@ export const getEmpDetails = (empName, history) => async dispatch => {
             type: GET_EMP_DETAILS,
             payload: res.data
          })
-         console.log(res.data)
+         console.log("res.data from backend::", res.data)
          history.push("/employee/leave")
       }
 
@@ -28,7 +28,7 @@ export const getEmpDetails = (empName, history) => async dispatch => {
 
 }
 export const resetReduxStore = () => dispatch => {
-   dispatch({ type: GET_EMP_DETAILS, payload: {} })
+   dispatch({ type: GET_EMP_DETAILS, payload: { employee: {}, admin: {} } })
 }
 
 // export const resetReduxStore = () => {

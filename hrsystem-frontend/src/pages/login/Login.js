@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Layout, Col, Button, Row, Form, Input } from 'antd'
 import logo from './../../images/workspez_logo.png'
 import { Link, Redirect } from 'react-router-dom'
-import { getEmpDetails } from "../../actions/authenticatorActions";
+import { getEmpDetails, resetReduxStore } from "../../actions/authenticatorActions";
 import PropTypes from "prop-types";
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { GET_EMP_DETAILS, GET_ADMIN_DETAILS } from '../../actions/types';
+//import { GET_EMP_DETAILS, GET_ADMIN_DETAILS } from '../../actions/types';
 
 // const resetReduxStore = () => {
 //    return dispatch => {

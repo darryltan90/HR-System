@@ -3,14 +3,15 @@ import LeaveCard from './widget/LeaveCard'
 import { Card, Layout, Row, Col, Button } from 'antd'
 import MenuHeader from '../../../components/MenuHeader'
 import { Link } from 'react-router-dom'
-import { getLeaves } from "../../../actions/employeeLeavesActions";
+import { getEmpLeaves } from "../../../actions/employeeLeavesActions";
 import { connect } from 'react-redux'
 
 class EmployeeLeaveDashboard extends Component {
 
    componentDidMount() {
-      console.log(JSON.stringify(this.props))
-      this.props.getLeaves()
+      console.log(JSON.stringify(this.props.auth))
+      this.props.getEmpLeaves(this.props.auth.empId)
+      //back end change return type to return all leaves, not only specific 1 leave
    }
 
    render() {
@@ -88,9 +89,13 @@ class EmployeeLeaveDashboard extends Component {
 }
 
 // mapping global state to local props
-const mapStateToProps = state => ({
-   leaves: state.leave
-})
+const mapStateToProps = state => {
+   //console.log("mapStateToProps", state.auth.employee)
+   return ({
+      auth: state.auth.employee,
+      leaves: state.leave
+   })
+}
 
 //connect component to global state
-export default connect(mapStateToProps, { getLeaves })(EmployeeLeaveDashboard)
+export default connect(mapStateToProps, { getEmpLeaves })(EmployeeLeaveDashboard)

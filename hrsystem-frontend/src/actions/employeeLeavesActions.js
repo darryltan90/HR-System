@@ -23,6 +23,15 @@ export const getLeaves = () => async dispatch => {
    })
 }
 
+//Get all leaves according to employee id--------------------------------------------------------
+export const getEmpLeaves = (empId) => async dispatch => {
+   const res = await axios.get(`http://localhost:8080/hrsystemApi/leaves/employee/allLeaves/${empId}`)
+   dispatch({
+      type: GET_LEAVES,
+      payload: res.data
+   })
+}
+
 //Delete leave----------------------------------------------------------
 export const deleteLeave = (leaveId, empId, userType) => async dispatch => {
 
