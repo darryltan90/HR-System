@@ -91,7 +91,7 @@ class UpdateLeave extends Component {
          <Layout>
             <Header>
                {/* pass props to choose default selected tab */}
-               <MenuHeader />
+               <MenuHeader selectedKey='leave' />
             </Header>
             <Content>
                <Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >

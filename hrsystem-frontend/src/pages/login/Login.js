@@ -65,11 +65,6 @@ class Login extends Component {
                            </Row>
                         </Form.Item>
                      </Form>
-                     <Button>
-                        <Link to='admin/leave'>
-                           Admin(no login)
-                        </Link>
-                     </Button>
                   </Row>
                </Col>
             </Layout.Content>

@@ -19,7 +19,7 @@ class LeaveCard extends Component {
          "status": 'REJECTED'
       }
       console.log("updateLeaveStatus data(check for empId):: ", updateLeaveStatus)
-      //this.props.updateLeaveStatus(updateLeaveStatus, null)
+      this.props.updateLeaveStatus(updateLeaveStatus, null)
    }
 
    onApproveClick = () => {
@@ -33,10 +33,8 @@ class LeaveCard extends Component {
          ...this.props.leave,
          "status": 'APPROVED'
       }
-
       console.log("updateLeaveStatus(check for empId):: ", updateLeaveStatus)
-      //this.props.updateLeaveStatus(updateLeaveStatus)
-
+      this.props.updateLeaveStatus(updateLeaveStatus)
    }
 
    render() {
@@ -44,8 +42,6 @@ class LeaveCard extends Component {
       const { /*id,*/ leaveType, startDate, endDate, reason, status, employee } = this.props.leave
 
       console.log("AdminLeaveCard status:: ", JSON.stringify(this.props.leave))
-
-
 
       if (status === 'APPROVED' || status === 'REJECTED') {
          //const deleteButton = <Icon type="delete" onClick={this.onDeleteClick.bind(this, id)} />

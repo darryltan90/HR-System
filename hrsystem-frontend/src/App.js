@@ -8,6 +8,8 @@ import store from './store'
 import UpdateLeave from './pages/Leave/employee/UpdateLeave';
 import Login from './pages/login/Login';
 import AdminLeaveDashboard from './pages/Leave/admin/AdminLeaveDashboard';
+import AdminEmployeeDashboard from './pages/Leave/admin/AdminEmployeesDashboard';
+import CalendarDashboard from './pages/CalendarDashboard';
 
 class App extends Component {
 
@@ -25,6 +27,9 @@ class App extends Component {
                   {/* Log in page */}
                   <Route exact path='/' component={Login} />
 
+                  {/* public pages */}
+                  <Route exact path='/calendar/' component={CalendarDashboard} />
+
                   {/* employee pages */}
                   {/* <Route exact path='/employee/leave/' component={authenticator.isLoggedIn ? EmployeeLeaveDashboard : this.redirectToLogin} /> */}
                   <Route exact path='/employee/leave/' component={EmployeeLeaveDashboard} />
@@ -33,6 +38,7 @@ class App extends Component {
 
                   {/* admin pages */}
                   <Route exact path='/admin/leave/' component={AdminLeaveDashboard} />
+                  <Route exact path='/admin/employee/' component={AdminEmployeeDashboard} />
                </div>
             </Router>
          </Provider>

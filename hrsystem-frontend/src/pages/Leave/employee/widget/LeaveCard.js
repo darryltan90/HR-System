@@ -47,9 +47,6 @@ class LeaveCard extends Component {
                      type="delete"
                      theme="twoTone"
                      twoToneColor="red"
-                     //onClick={this.onDeleteClick}
-                     // onClick={this.onDeleteClick.bind(this, id)}
-                     //onClick={this.onDeleteClick.bind(this, id, employee.empId)}
                      style={{ fontSize: 'large' }}
                   />
                </Popconfirm>

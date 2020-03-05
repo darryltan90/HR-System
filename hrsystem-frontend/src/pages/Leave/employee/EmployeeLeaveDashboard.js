@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import LeaveCard from './widget/LeaveCard'
-import { Card, Layout, Row, Col, Button } from 'antd'
+import { Card, Layout, Row, Col, Button, Empty } from 'antd'
 import MenuHeader from '../../../components/MenuHeader'
 import { Link } from 'react-router-dom'
 import { getEmpLeaves } from "../../../actions/employeeLeavesActions";
@@ -45,8 +45,8 @@ class EmployeeLeaveDashboard extends Component {
             }
          }
 
-         // if nothing in any column, "nothing here" is rendered instead
-         const nothing = <p key="nothing">Nothing here</p>
+         // if nothing in any column, <Empty /> is rendered instead
+         const nothing = <Empty />
          if (pendingLeaves.length === 0) {
             console.log('nothing in pending column')
             pendingLeaves.push(nothing)
@@ -92,25 +92,21 @@ class EmployeeLeaveDashboard extends Component {
          <Layout>
             <Header>
                {/* pass props to choose default selected tab */}
-               <MenuHeader />
+               <MenuHeader selectedKey="leave" />
             </Header>
             <Content>
                {BoardAlgorithm(leaves)}
             </Content>
          </Layout>
       )
-
    }
 }
 
 // mapping global state to local props
-const mapStateToProps = state => {
-   //console.log("mapStateToProps", state.auth.employee)
-   return ({
-      auth: state.auth.employee,
-      leaves: state.leave
-   })
-}
+const mapStateToProps = state => ({
+   auth: state.auth.employee,
+   leaves: state.leave
+})
 
 //connect component to global state
 export default connect(mapStateToProps, { getEmpLeaves })(EmployeeLeaveDashboard)

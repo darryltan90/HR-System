@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AdminLeaveCard from './widget/AdminLeaveCard'
-import { Card, Layout, Row, Col } from 'antd'
+import { Card, Layout, Row, Col, Empty } from 'antd'
 import MenuHeader from '../../../components/MenuHeader'
 import { getLeaves } from "../../../actions/employeeLeavesActions";
 import { connect } from 'react-redux'
@@ -43,8 +43,8 @@ class AdminLeaveDashboard extends Component {
             }
          }
 
-         // if nothing in any column, "nothing here" is rendered instead
-         const nothing = <p key="nothing">Nothing here</p>
+         // if nothing in any column, <Empty /> is rendered instead
+         const nothing = <Empty />
          if (pendingLeaves.length === 0) {
             console.log('nothing in pending column')
             pendingLeaves.push(nothing)
@@ -85,7 +85,7 @@ class AdminLeaveDashboard extends Component {
          <Layout>
             <Header>
                {/* pass props to choose default selected tab */}
-               <MenuHeader />
+               <MenuHeader selectedKey='adminLeave' />
             </Header>
             <Content>
                {BoardAlgorithm(leaves)}

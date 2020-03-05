@@ -24,6 +24,10 @@ public class Employee {
 	
 	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "emp_type")
+	private String empType;
+	
 
 	public int getEmpId() {
 		return empId;
@@ -57,5 +61,11 @@ public class Employee {
 		this.password = password;
 	}
 	
-	
+	public String getEmpType() {
+		return empType;
+	}
+
+	public void setEmpType(String empType) {
+		this.empType = empType;
+	}
 }
