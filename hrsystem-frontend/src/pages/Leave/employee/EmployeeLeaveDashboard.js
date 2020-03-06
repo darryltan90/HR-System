@@ -46,7 +46,7 @@ class EmployeeLeaveDashboard extends Component {
          }
 
          // if nothing in any column, <Empty /> is rendered instead
-         const nothing = <Empty />
+         const nothing = <Empty key='nothing' />
          if (pendingLeaves.length === 0) {
             console.log('nothing in pending column')
             pendingLeaves.push(nothing)

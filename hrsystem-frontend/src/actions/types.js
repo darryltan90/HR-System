@@ -11,12 +11,19 @@ export const GET_LEAVE = "GET_LEAVE";
 
 export const DELETE_LEAVE = "DELETE_LEAVE";
 
-export const POST = "POST";
+export const POST_LEAVE = "POST_LEAVE";
 
 //ADMIN ACTIONS
-//export const UPDATE_LEAVE_STATUS = 'UPDATE_LEAVE_STATUS';
+export const POST_EMP = 'POST_EMP';
+
+export const GET_ALL_EMP = 'GET_ALL_EMP';
+
+export const DELETE_EMP = 'DELETE_EMP';
+
 
 //AITHENTICATION ACTIONS
 export const GET_EMP_DETAILS = "GET_EMP_DETAILS";
+
 export const GET_ADMIN_DETAILS = "GET_ADMIN_DETAILS";
+
 export const USER_LOGOUT = "USER_LOGOUT";

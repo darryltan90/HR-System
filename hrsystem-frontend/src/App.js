@@ -10,6 +10,7 @@ import Login from './pages/login/Login';
 import AdminLeaveDashboard from './pages/Leave/admin/AdminLeaveDashboard';
 import AdminEmployeeDashboard from './pages/Leave/admin/AdminEmployeesDashboard';
 import CalendarDashboard from './pages/CalendarDashboard';
+import NewEmployee from './pages/Leave/admin/NewEmployee';
 
 class App extends Component {
 
@@ -39,6 +40,8 @@ class App extends Component {
                   {/* admin pages */}
                   <Route exact path='/admin/leave/' component={AdminLeaveDashboard} />
                   <Route exact path='/admin/employee/' component={AdminEmployeeDashboard} />
+                  <Route exact path='/admin/employee/newEmployee' component={NewEmployee} />
+
                </div>
             </Router>
          </Provider>

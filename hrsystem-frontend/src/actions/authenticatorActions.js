@@ -1,11 +1,8 @@
 import axios from 'axios'
-import { /*GET_ADMIN_DETAILS,*/ GET_EMP_DETAILS, USER_LOGOUT } from "./types";
+import { GET_EMP_DETAILS, USER_LOGOUT } from "./types";
 
 export const getEmpDetails = (empName, password, history) => async dispatch => {
    try {
-      console.log("empName:: ", empName)
-      console.log("password:: ", password)
-
       const formData = new FormData()
       formData.append("empName", empName)
       formData.append("password", password)
@@ -18,7 +15,7 @@ export const getEmpDetails = (empName, password, history) => async dispatch => {
             type: GET_EMP_DETAILS,
             payload: res.data
          })
-         console.log("res.data from backend::", res.data)
+
          history.push("/employee/leave")
       }
 

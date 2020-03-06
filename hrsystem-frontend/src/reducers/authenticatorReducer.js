@@ -1,8 +1,7 @@
 import { GET_ADMIN_DETAILS, GET_EMP_DETAILS, USER_LOGOUT } from "../actions/types";
 
 const initialState = {
-   employee: {},
-   admin: {}
+   employee: {}
 }
 
 // push data to redux store
@@ -23,8 +22,7 @@ export default function (state = initialState, action) {
       case USER_LOGOUT:
          console.log('USER_LOGOUT action:: ', action)
          return {
-            employee: {},
-            admin: {}
+            employee: {}
          }
       default:
          return state

@@ -88,7 +88,6 @@ class NewLeave extends Component {
                         {getFieldDecorator("leave-type", { ...leaveTypeFieldDecorator })(
                            <Select
                               placeholder="Leave type"
-                           //value={this.state.leaveType}
                            >
                               <Select.Option value="Annual">Annual</Select.Option>
                               <Select.Option value="Medical">Medical</Select.Option>

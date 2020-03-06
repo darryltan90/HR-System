@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { updateLeaveStatus } from "../../../../actions/adminLeavesActions";
 
 class LeaveCard extends Component {
+   //color = {}
 
    onRejectClick = () => {
       const updateLeaveStatus = {
@@ -45,9 +46,20 @@ class LeaveCard extends Component {
 
       if (status === 'APPROVED' || status === 'REJECTED') {
          //const deleteButton = <Icon type="delete" onClick={this.onDeleteClick.bind(this, id)} />
+         //const a = null
+         switch (status === 'APPROVED') {
+            case 'APPROVED':
+               this.color = { backgroundColor: '#8fd460' }
+               break;
+            case 'REJECTED':
+               this.color = { backgroundColor: '#8fd460' }
+               break;
+            default:
+               this.color = {}
+         }
          return (
             <Card
-               style={{ width: 435, marginTop: 16 }}
+               style={{ width: 435, marginTop: 16, /*...this.color*/ }}
             >
                <Meta
                   title={`${leaveType} - ${employee.empName}`}
@@ -62,7 +74,7 @@ class LeaveCard extends Component {
 
       return (
          <Card
-            style={{ width: 435, marginTop: 16 }}
+            style={{ width: 435, marginTop: 16, /*backgroundColor: '#f8f48b'*/ }}
             actions={[
                <Popconfirm
                   title={`Reject ${leaveType} leave requested by ${employee.empName}?`}

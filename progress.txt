@@ -1,0 +1,42 @@
+----------------------------------------------TO DO----------------------------------------------
+(frontend - CALENDAR)
+shows whoever is on leave
+
+(frontend - all dashboards)
+change card color to something darker(easier to see)
+change each row color (pending to yellow; approved to green; rejected to red)
+
+(frontend - all pages with forms)
+change all validation messages to simpler form, refer antd(Form methods code)
+make the onSubmit button also display error message of AntD on top
+
+(frontend - redux)
+use useState to update status(pending...) instead of changing whole redux state
+try to change editLeave to use 'leave' from 'leaves' instead of getting whole leave again
+change auth: remove admin option
+(try to find all using this.props.[name here])
+change leave: rename 'leaves' to 'reduxLeaves'
+change leave: rename 'leave' to 'reduxLeave'
+change 'auth' to 'reduxAuth'
+change 'leave' to 'reduxLeave'
+
+(frontend - all)
+each page must redirect to login if no user details found
+try to not show id in updateLeaves page
+
+(backend - Leave.java)
+change date data type(refer to email)
+
+(frontend - MenuHeader)
+change selectedKey employee to employees, ***do this for all files containing MenuHeader***
+***also change the link in App.js and all relevant buttons***
+
+-------------------------------------------IN PROGRESS-------------------------------------------
+(frontend - admin)
+CRUD operations for addEmployee page
+-read done
+-create(in progress now){NewEmployee.js onSubmit test for validation first with clog}
+
+-----------------------------------------------DONE----------------------------------------------
+(frontend - admin)(DONE)
+add view all employee page
