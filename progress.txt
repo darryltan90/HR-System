@@ -9,9 +9,6 @@ merge new and update forms together for less pages
 (frontend - CALENDAR)
 shows whoever is on leave
 
-(frontend - Ant Design form validation)
-update to v4 and change all forms
-
 (frontend - all dashboards)
 change card color to something darker(easier to see)
 change each row color (pending to yellow; approved to green; rejected to red)
@@ -45,8 +42,9 @@ change selectedKey employee to employees, ***do this for all files containing Me
 -------------------------------------------IN PROGRESS-------------------------------------------
 (frontend - admin)
 CRUD operations for addEmployee page
--read done
--create(in progress now){NewEmployee.js onSubmit test for validation first with clog}
+-read done(tested)
+-create done(tested)
+-update (in progress)(no testing done yet)
 
 -----------------------------------------------DONE----------------------------------------------
 (frontend - admin)(DONE)
