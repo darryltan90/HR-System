@@ -1,7 +1,8 @@
 import { POST_EMP, GET_ALL_EMP, DELETE_EMP } from "../actions/types";
 
 const initialState = {
-   employees: []
+   employees: [],
+   employee_details: {}
 }
 
 export default function (state = initialState, action) {
@@ -10,7 +11,7 @@ export default function (state = initialState, action) {
          return {
             ...state,
             employees: [
-               ...state.leaves.filter(
+               ...state.employees.filter(
                   item => item.id !== action.payload.id
                ),
                action.payload
@@ -28,7 +29,7 @@ export default function (state = initialState, action) {
          return {
             ...state,
             employees: state.employees.filter(
-               employee => employee.id !== action.payload
+               item => item.id !== action.payload
             )
          }
 

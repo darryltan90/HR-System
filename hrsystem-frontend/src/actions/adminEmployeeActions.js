@@ -4,7 +4,9 @@ import { POST_EMP, GET_ALL_EMP, DELETE_EMP } from "./types";
 // Add/Update employee
 export const addEmp = (employee, history) => async dispatch => {
    console.log('addEmp employee::', employee)
-   const res = await axios.post("http://localhost:8080/hrsystemApi/employees/admin/add")
+   console.log('addEmp history::', history)
+   //return
+   const res = await axios.post("http://localhost:8080/hrsystemApi/employees/admin/add", employee)
    console.log('addLeave res::', res)
    dispatch({ type: POST_EMP, payload: res.data })
 

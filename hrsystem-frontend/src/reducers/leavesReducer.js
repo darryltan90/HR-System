@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
          return {
             ...state,
             leaves: state.leaves.filter(
-               leave => leave.id !== action.payload
+               item => item.id !== action.payload
             )
          }
 

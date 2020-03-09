@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { addEmp } from '../../../actions/adminEmployeeActions';
 import { Link } from 'react-router-dom';
 
-class NewEmployee extends Component {
+class UpdateEmployee extends Component {
 
    // when submit button is clicked
    onSubmit = e => {
@@ -24,7 +24,7 @@ class NewEmployee extends Component {
             empType: fieldsValue['empType']
          }
 
-         console.log('NewEmployee received form values:: ', newEmp)
+         console.log('UpdateEmployee received form values:: ', newEmp)
 
          this.props.addEmp(newEmp, this.props.history)
       })
@@ -120,4 +120,13 @@ class NewEmployee extends Component {
    }
 }
 
-export default compose(connect(null, { addEmp }), Form.create())(NewEmployee)
+UpdateEmployee.propTypes = {
+   //getEmp
+}
+
+const mapStateToProps = state => ({
+   auth: state.auth.employee,
+   employeeDetails: state.employee_details
+})
+
+export default compose(connect(mapStateToProps, { addEmp }), Form.create())(UpdateEmployee)

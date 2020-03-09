@@ -86,6 +86,7 @@ class AdminEmployeeDashboard extends Component {
                   <Table
                      dataSource={empDetails}
                      columns={columnDetails}
+                     rowKey={row => row.empId}
                      bordered
                   />
                </Col>

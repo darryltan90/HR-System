@@ -1,6 +1,16 @@
 ----------------------------------------------TO DO----------------------------------------------
+***************(frontend - all forms)***************
+update antd to v4
+change all form validations to new method
+****************************************************
+(frontend - all new and update forms)
+merge new and update forms together for less pages
+
 (frontend - CALENDAR)
 shows whoever is on leave
+
+(frontend - Ant Design form validation)
+update to v4 and change all forms
 
 (frontend - all dashboards)
 change card color to something darker(easier to see)
@@ -15,12 +25,13 @@ use useState to update status(pending...) instead of changing whole redux state
 try to change editLeave to use 'leave' from 'leaves' instead of getting whole leave again
 change auth: remove admin option
 (try to find all using this.props.[name here])
-change leave: rename 'leaves' to 'reduxLeaves'
-change leave: rename 'leave' to 'reduxLeave'
-change 'auth' to 'reduxAuth'
 change 'leave' to 'reduxLeave'
+change leave: rename 'leaves' to 'all_leaves'
+change leave: rename 'leave' to 'leave_details'
+change 'auth.employee' to 'auth.user'
+change 'employee' to 'reduxEmployee'
 
-(frontend - all)
+(frontend - all(redirect))
 each page must redirect to login if no user details found
 try to not show id in updateLeaves page
 
