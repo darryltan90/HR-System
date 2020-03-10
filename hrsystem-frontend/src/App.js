@@ -16,6 +16,7 @@ import UpdateEmployee from './pages/Leave/admin/UpdateEmployee';
 
 class App extends Component {
 
+   //not used yet
    redirectToLogin = () => {
       return (
          <Redirect to='/' />

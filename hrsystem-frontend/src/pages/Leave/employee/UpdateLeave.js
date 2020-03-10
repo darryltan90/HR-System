@@ -27,9 +27,10 @@ class UpdateLeave extends Component {
       console.log('onSubmit this.state::: ', JSON.stringify(this.state))
 
       this.props.form.validateFields((err, fieldsValue) => {
-         if (err) {
-            // if got error, dont do anything
-            return;
+         if (err || fieldsValue['leave-type'] === undefined) {
+            return (
+               console.log('error/leave-type null:::', fieldsValue['leave-type'])
+            )
          }
 
          // Should format date value before submit.

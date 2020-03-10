@@ -1,14 +1,47 @@
 import React, { Component } from 'react'
-import { Layout, Table, Col, Row, Icon, Button, Tag } from 'antd'
+import { Layout, Table, Col, Row, Icon, Button, Tag, Modal } from 'antd'
 import MenuHeader from '../../../components/MenuHeader'
 import { Link } from 'react-router-dom'
-import { getAllEmp } from '../../../actions/adminEmployeeActions'
+import { getAllEmp, getEmp, deleteEmp } from '../../../actions/adminEmployeeActions'
 import { connect } from 'react-redux'
 
 
 class AdminEmployeeDashboard extends Component {
    componentDidMount() {
       this.props.getAllEmp()
+   }
+
+   onEditClick = employee => {
+      //dispatches the employee details to redux
+      this.props.getEmp(employee)
+   }
+
+   onDeleteClick = employee => {
+      console.log('delete modal click::', employee)
+
+      const deleteEmp2 = this.props.deleteEmp
+
+      Modal.confirm({
+         title: 'Are you sure you want to delete this employee?',
+         icon: <Icon
+            type='exclamation-circle'
+            style={{ fontSize: 'large' }}
+         />,
+         content:
+            <b>
+               ID: {employee.empId}<br />
+               Name: {employee.empName}<br />
+               Email: {employee.email}<br />
+               Type: {employee.empType}<br />
+            </b>,
+         okText: 'Yes',
+         okType: 'danger',
+         cancelText: 'No',
+         onOk() {
+            console.log('delete modal ok click:::', employee.empId)
+            deleteEmp2(employee.empId)
+         }
+      })
    }
 
    render() {
@@ -36,38 +69,36 @@ class AdminEmployeeDashboard extends Component {
             }
          },
          {
-            //empId will be used to link delete and edit for employee
-            title: 'Actions', key: 'actions', render: (empId) =>
+            //employee will be used to link delete and edit
+            title: 'Actions', key: 'actions', render: (employee) =>
                <Row justify='space-around'>
                   <Col span={1}>
-                     <a>
-                        <Icon
-                           type="delete"
-                           theme="twoTone"
-                           twoToneColor="red"
-                           style={{ fontSize: 'large' }}
-                        />
-                     </a>
+
+                     <Icon
+                        type="delete"
+                        theme="twoTone"
+                        twoToneColor="red"
+                        style={{ fontSize: 'large' }}
+                        onClick={() => this.onDeleteClick(employee)}
+                     />
+
                   </Col>
                   <Col span={1} push={2}>
-                     <a>
+                     <Link to='/admin/employee/updateEmployee'>
                         <Icon
                            type="edit"
                            theme="twoTone"
                            style={{ fontSize: 'large' }}
+                           //inline function needed to pass values
+                           onClick={() => this.onEditClick(employee)}
                         />
-                     </a>
+                     </Link>
                   </Col>
                </Row>
          }
       ]
-      // const {employees} = this.props.employees //needs mapStateToProps
 
-      // this.props.empDetails (use map and loop)
       const empDetails = [
-         // { 'empId': 1, 'empName': 'name-1', 'email': 'email-1', 'empType': 'admin' },
-         // { 'empId': 2, 'empName': 'name-2', 'email': 'email-2', 'empType': 'employee' },
-         // { 'empId': 3, 'empName': 'name-3', 'email': 'email-3', 'empType': 'employee' },
          ...this.props.employees.employees
       ]
 
@@ -100,4 +131,4 @@ const mapStateToProps = state => ({
    employees: state.employee
 })
 
-export default connect(mapStateToProps, { getAllEmp })(AdminEmployeeDashboard)
+export default connect(mapStateToProps, { getAllEmp, getEmp, deleteEmp })(AdminEmployeeDashboard)

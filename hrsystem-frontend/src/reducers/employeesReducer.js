@@ -1,4 +1,4 @@
-import { POST_EMP, GET_ALL_EMP, DELETE_EMP } from "../actions/types";
+import { POST_EMP, GET_ALL_EMP, GET_EMP, DELETE_EMP } from "../actions/types";
 
 const initialState = {
    employees: [],
@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
             ...state,
             employees: [
                ...state.employees.filter(
-                  item => item.id !== action.payload.id
+                  item => item.empId !== action.payload.empId
                ),
                action.payload
             ]
@@ -24,12 +24,18 @@ export default function (state = initialState, action) {
             employees: action.payload
          }
 
+      case GET_EMP:
+         return {
+            ...state,
+            employee_details: action.payload
+         }
+
       //no yet implemented in backend
       case DELETE_EMP:
          return {
             ...state,
             employees: state.employees.filter(
-               item => item.id !== action.payload
+               item => item.empId !== action.payload
             )
          }
 

@@ -17,22 +17,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.workspez.hrsystem.domain.Employee;
 import com.workspez.hrsystem.domain.Leave;
-import com.workspez.hrsystem.service.EmployeeService;
 import com.workspez.hrsystem.service.LeaveService;
 
 @RestController
 @RequestMapping ("/hrsystemApi/leaves")
 @CrossOrigin
 public class LeaveController {
+	
 	@Autowired 
 	private LeaveService leaveService;
 
-	
 	//-------------------EMPLOYEE-------------------//
 	@PostMapping("/employee/add")//empty means using the same address as the top: "/hrsystemApi/leaves"
 	public ResponseEntity<?> addLeave(@Valid @RequestBody Leave leave, BindingResult result){

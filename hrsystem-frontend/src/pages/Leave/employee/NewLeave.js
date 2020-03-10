@@ -17,9 +17,8 @@ class NewLeave extends Component {
       e.preventDefault();
 
       this.props.form.validateFields((err, fieldsValue) => {
-         if (err) {
-            // if got error, dont do anything
-            return;
+         if (err || fieldsValue['leave-type'] === undefined) {
+            return (console.log('error/leave-type null:::', fieldsValue['leave-type']))
          }
 
          console.log("NewLeave this.props.auth", this.props.auth)

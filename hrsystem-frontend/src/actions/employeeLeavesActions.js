@@ -11,7 +11,7 @@ export const addLeave = (leave, history) => async dispatch => {
    dispatch({ type: POST_LEAVE, payload: res.data });
 
    if (history) {
-      history.push("/")
+      history.push("/employee/leave/")
    }
 }
 

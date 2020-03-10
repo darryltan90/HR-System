@@ -21,12 +21,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.workspez.hrsystem.domain.Employee;
 import com.workspez.hrsystem.service.EmployeeService;
+import com.workspez.hrsystem.service.LeaveService;
 
 @RestController
 @RequestMapping("/hrsystemApi/employees")
 @CrossOrigin
 public class EmployeeController {
-	@Autowired EmployeeService employeeService;
+	
+	@Autowired 
+	EmployeeService employeeService;
+	
+	@Autowired
+	LeaveService leaveService;
 	
 	// add/update employee
 	@PostMapping("/admin/add")
@@ -50,11 +56,15 @@ public class EmployeeController {
 	}
 	
 	// delete employee(service not done)
-//	@DeleteMapping("/admin/deleteEmployee/{empId}")
-//	public ResponseEntity<?> delById(@PathVariable int empId){
-//		//not yet added
-//		employeeService.delete(empId);
-//		return new ResponseEntity<String>("Employee deleted", HttpStatus.OK);
-//	}
+	@DeleteMapping("/admin/deleteEmployee/{empId}")
+	public ResponseEntity<?> delById(@PathVariable int empId){
+		
+		// deleting leaves
+		leaveService.deleteLeavesByEmpId(empId);
+
+		// deleting employee
+		employeeService.delete(empId);
+		return new ResponseEntity<String>("Employee and leaves deleted", HttpStatus.OK);
+	}
 
 }

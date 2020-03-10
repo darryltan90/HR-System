@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.workspez.hrsystem.domain.Employee;
-import com.workspez.hrsystem.domain.Leave;
 import com.workspez.hrsystem.repo.EmployeeRepo;
 
 @Service
@@ -35,9 +34,9 @@ public class EmployeeService {
 	
 	// need to delete all leaves associated with the employee as well
 	// delete employee according to leave id and empId
-//	public void delete(int empId) {
-//		Employee employee = findEmpDetailsById(empId);
-//		employeeRepo.delete(employee);
-//	}
+	public void delete(int empId) {
+		Employee employee = findEmpDetailsById(empId);
+		employeeRepo.delete(employee);
+	}
 	
 }

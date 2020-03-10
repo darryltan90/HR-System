@@ -16,6 +16,8 @@ export const POST_LEAVE = "POST_LEAVE";
 //ADMIN ACTIONS
 export const POST_EMP = 'POST_EMP';
 
+export const GET_EMP = 'GET_EMP';
+
 export const GET_ALL_EMP = 'GET_ALL_EMP';
 
 export const DELETE_EMP = 'DELETE_EMP';

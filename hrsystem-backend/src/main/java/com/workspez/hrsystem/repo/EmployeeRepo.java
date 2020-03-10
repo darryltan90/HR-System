@@ -16,4 +16,6 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long>{
 	@Query(value = "select * from employees where emp_id =:empId", nativeQuery = true)
 	Employee findEmpDetailsById(@Param("empId") int empId);
 	
+	
+	
 }

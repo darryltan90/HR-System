@@ -3,6 +3,11 @@
 update antd to v4
 change all form validations to new method
 ****************************************************
+
+(frontend - all pages with forms)
+change all validation messages to simpler form, refer antd(Form methods code)
+make the onSubmit button also display error message of AntD on top (AntD Message)
+
 (frontend - all new and update forms)
 merge new and update forms together for less pages
 
@@ -12,21 +17,6 @@ shows whoever is on leave
 (frontend - all dashboards)
 change card color to something darker(easier to see)
 change each row color (pending to yellow; approved to green; rejected to red)
-
-(frontend - all pages with forms)
-change all validation messages to simpler form, refer antd(Form methods code)
-make the onSubmit button also display error message of AntD on top
-
-(frontend - redux)
-use useState to update status(pending...) instead of changing whole redux state
-try to change editLeave to use 'leave' from 'leaves' instead of getting whole leave again
-change auth: remove admin option
-(try to find all using this.props.[name here])
-change 'leave' to 'reduxLeave'
-change leave: rename 'leaves' to 'all_leaves'
-change leave: rename 'leave' to 'leave_details'
-change 'auth.employee' to 'auth.user'
-change 'employee' to 'reduxEmployee'
 
 (frontend - all(redirect))
 each page must redirect to login if no user details found
@@ -39,13 +29,23 @@ change date data type(refer to email)
 change selectedKey employee to employees, ***do this for all files containing MenuHeader***
 ***also change the link in App.js and all relevant buttons***
 
+(frontend - BrowserRouter as Router)
+reduce url length by using 'basename'
 -------------------------------------------IN PROGRESS-------------------------------------------
-(frontend - admin)
-CRUD operations for addEmployee page
--read done(tested)
--create done(tested)
--update (in progress)(no testing done yet)
+(frontend - redux)
+use useState to update status(pending...) instead of changing whole redux state
+try to change editLeave to use 'leave' from 'leaves' instead of getting whole leave again
+change auth: remove admin option
+(try to find all using this.props.[name here])
+change 'leave' to 'reduxLeave'
+change leave: rename 'leaves' to 'all_leaves'
+change leave: rename 'leave' to 'leave_details'
+change 'auth.employee' to 'auth.user'
+change 'employee' to 'reduxEmployee'
 
 -----------------------------------------------DONE----------------------------------------------
 (frontend - admin)(DONE)
 add view all employee page
+
+(frontend - admin)
+CRUD operations for addEmployee page

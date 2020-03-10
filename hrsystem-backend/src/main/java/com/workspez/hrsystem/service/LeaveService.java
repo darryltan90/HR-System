@@ -38,4 +38,8 @@ public class LeaveService {
 		leaveRepo.delete(leave);
 	}
 	
+	public void deleteLeavesByEmpId(int empId) {
+		leaveRepo.deleteLeavesByEmpId(empId);
+	}
+	
 }

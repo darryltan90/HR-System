@@ -8,25 +8,31 @@ import { Link } from 'react-router-dom';
 
 class UpdateEmployee extends Component {
 
+   componentDidMount() {
+      console.log('this.props.employee_details', this.props.employee_details)
+   }
+
+
    // when submit button is clicked
    onSubmit = e => {
       e.preventDefault()
 
       this.props.form.validateFields((err, fieldsValue) => {
-         if (err) {
-            return
+         if (err || fieldsValue['empType'] === undefined) {
+            return (console.log('error/emptype null:::', fieldsValue['empType']))
          }
 
-         const newEmp = {
+         const updateEmp = {
+            empId: this.props.employee_details.empId,
             empName: fieldsValue['empName'],
             email: fieldsValue['email'],
             password: fieldsValue['password'],
             empType: fieldsValue['empType']
          }
 
-         console.log('UpdateEmployee received form values:: ', newEmp)
+         console.log('UpdateEmployee received form values:: ', updateEmp)
 
-         this.props.addEmp(newEmp, this.props.history)
+         this.props.addEmp(updateEmp, this.props.history)
       })
    }
 
@@ -37,21 +43,26 @@ class UpdateEmployee extends Component {
 
       const { getFieldDecorator } = this.props.form;
 
+      const { empName, email, password, empType } = this.props.employee_details
+
       const nameFieldDecorator = [{
-         rules: [{ required: true, message: "Please enter a name!" }]
+         rules: [{ required: true, message: "Please enter a name!" }],
+         initialValue: empName
       }]
 
       const empTypeFieldDecorator = [{
          rules: [{ required: true, message: "Please select an employee type!" }],
-         initialValue: 'Employee'
+         initialValue: empType
       }]
 
       const emailFieldDecorator = [{
-         rules: [{ required: true, message: "Please enter an email!" }]
+         rules: [{ required: true, message: "Please enter an email!" }],
+         initialValue: email
       }]
 
       const passwordFieldDecorator = [{
-         rules: [{ required: true, message: "Please enter a password!" }]
+         rules: [{ required: true, message: "Please enter a password!" }],
+         initialValue: password
       }]
 
       return (
@@ -61,7 +72,7 @@ class UpdateEmployee extends Component {
             </Header>
             <Content>
                <Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >
-                  <h1>New Employee</h1>
+                  <h1>Update Employee</h1>
                   <Form onSubmit={this.onSubmit}>
 
                      {/* employee name */}
@@ -126,7 +137,7 @@ UpdateEmployee.propTypes = {
 
 const mapStateToProps = state => ({
    auth: state.auth.employee,
-   employeeDetails: state.employee_details
+   employee_details: state.employee.employee_details
 })
 
 export default compose(connect(mapStateToProps, { addEmp }), Form.create())(UpdateEmployee)

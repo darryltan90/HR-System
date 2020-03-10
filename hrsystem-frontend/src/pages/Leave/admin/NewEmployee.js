@@ -13,8 +13,8 @@ class NewEmployee extends Component {
       e.preventDefault()
 
       this.props.form.validateFields((err, fieldsValue) => {
-         if (err) {
-            return
+         if (err || fieldsValue['empType'] === undefined) {
+            return (console.log('error/emptype null:::', fieldsValue['empType']))
          }
 
          const newEmp = {
