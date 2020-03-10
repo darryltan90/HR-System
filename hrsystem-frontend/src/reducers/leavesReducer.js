@@ -1,7 +1,7 @@
 import { GET_LEAVES, DELETE_LEAVE, GET_LEAVE, POST_LEAVE, USER_LOGOUT } from "../actions/types";
 
 const initialState = {
-   leaves: [],
+   allLeaves: [],
    leave: {}
 }
 
@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
       case GET_LEAVES:
          return {
             ...state,
-            leaves: action.payload
+            allLeaves: action.payload
          }
 
       case GET_LEAVE:
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
       case DELETE_LEAVE:
          return {
             ...state,
-            leaves: state.leaves.filter(
+            allLeaves: state.allLeaves.filter(
                item => item.id !== action.payload
             )
          }
@@ -31,8 +31,8 @@ export default function (state = initialState, action) {
          console.log('POST_LEAVE action:: ', action)
          return {
             ...state,
-            leaves: [
-               ...state.leaves.filter(
+            allLeaves: [
+               ...state.allLeaves.filter(
                   item => item.id !== action.payload.id
                ),
                action.payload

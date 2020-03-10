@@ -15,8 +15,8 @@ class AdminLeaveDashboard extends Component {
 
       const { Header, Content, /*Footer*/ } = Layout;
 
-      const { leaves } = this.props.leaves
-      console.log('AdminLeaveDashBoard leaves:::', leaves)
+      const { allLeaves } = this.props.allLeaves
+      console.log('AdminLeaveDashBoard allLeaves:::', allLeaves)
 
       //pending
       let pendingLeaves = []
@@ -27,19 +27,19 @@ class AdminLeaveDashboard extends Component {
       //rejected
       let rejectedLeaves = []
 
-      const BoardAlgorithm = leaves => {
-         const cards = leaves.map(leave => (
-            <AdminLeaveCard key={leave.id} leave={leave} />
+      const BoardAlgorithm = allLeaves => {
+         const cards = allLeaves.map(leaveDetails => (
+            <AdminLeaveCard key={leaveDetails.id} leaveDetails={leaveDetails} />
          ))
 
-         for (let i = 0; i < leaves.length; i++) {
-            if (cards[i].props.leave.status === "PENDING") {
+         for (let i = 0; i < allLeaves.length; i++) {
+            if (cards[i].props.leaveDetails.status === "PENDING") {
                pendingLeaves.push(cards[i])
             }
-            if (cards[i].props.leave.status === "APPROVED") {
+            if (cards[i].props.leaveDetails.status === "APPROVED") {
                approvedLeaves.push(cards[i])
             }
-            if (cards[i].props.leave.status === "REJECTED") {
+            if (cards[i].props.leaveDetails.status === "REJECTED") {
                rejectedLeaves.push(cards[i])
             }
          }
@@ -89,7 +89,7 @@ class AdminLeaveDashboard extends Component {
                <MenuHeader selectedKey='adminLeave' />
             </Header>
             <Content>
-               {BoardAlgorithm(leaves)}
+               {BoardAlgorithm(allLeaves)}
             </Content>
          </Layout>
       )
@@ -99,7 +99,7 @@ class AdminLeaveDashboard extends Component {
 
 // mapping global state to local props
 const mapStateToProps = state => ({
-   leaves: state.leave
+   allLeaves: state.leaveDetails
 })
 
 //connect component to global state

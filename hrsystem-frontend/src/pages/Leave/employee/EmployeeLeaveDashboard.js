@@ -17,7 +17,7 @@ class EmployeeLeaveDashboard extends Component {
 
       const { Header, Content, /*Footer*/ } = Layout;
 
-      const { leaves } = this.props.leaves
+      const { allLeaves } = this.props.allLeaves
 
       //pending
       let pendingLeaves = []
@@ -28,12 +28,12 @@ class EmployeeLeaveDashboard extends Component {
       //rejected
       let rejectedLeaves = []
 
-      const BoardAlgorithm = leaves => {
-         const cards = leaves.map(leave => (
+      const BoardAlgorithm = allLeaves => {
+         const cards = allLeaves.map(leave => (
             <LeaveCard key={leave.id} leave={leave} empId={leave.empId} />
          ))
 
-         for (let i = 0; i < leaves.length; i++) {
+         for (let i = 0; i < allLeaves.length; i++) {
             if (cards[i].props.leave.status === "PENDING") {
                pendingLeaves.push(cards[i])
             }
@@ -95,7 +95,7 @@ class EmployeeLeaveDashboard extends Component {
                <MenuHeader selectedKey="leave" />
             </Header>
             <Content>
-               {BoardAlgorithm(leaves)}
+               {BoardAlgorithm(allLeaves)}
             </Content>
          </Layout>
       )
@@ -105,7 +105,7 @@ class EmployeeLeaveDashboard extends Component {
 // mapping global state to local props
 const mapStateToProps = state => ({
    auth: state.auth.employee,
-   leaves: state.leave
+   allLeaves: state.leave
 })
 
 //connect component to global state

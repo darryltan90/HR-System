@@ -38,10 +38,13 @@ try to change editLeave to use 'leave' from 'leaves' instead of getting whole le
 change auth: remove admin option
 (try to find all using this.props.[name here])
 change 'leave' to 'reduxLeave'
-change leave: rename 'leaves' to 'all_leaves'
-change leave: rename 'leave' to 'leave_details'
+change leave: rename 'leaves' to 'allLeaves'
+change leave: rename 'leave' to 'leaveDetails'
 change 'auth.employee' to 'auth.user'
 change 'employee' to 'reduxEmployee'
+
+changed 'leaves' to 'allLeaves'
+changing 'leave' to 'leaveDetails'
 
 -----------------------------------------------DONE----------------------------------------------
 (frontend - admin)(DONE)
