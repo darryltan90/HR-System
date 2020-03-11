@@ -8,116 +8,116 @@ import { Link } from 'react-router-dom';
 
 class NewEmployee extends Component {
 
-   // when submit button is clicked
-   onSubmit = e => {
-      e.preventDefault()
+	// when submit button is clicked
+	onSubmit = e => {
+		e.preventDefault()
 
-      this.props.form.validateFields((err, fieldsValue) => {
-         if (err || fieldsValue['empType'] === undefined) {
-            return (console.log('error/emptype null:::', fieldsValue['empType']))
-         }
+		this.props.form.validateFields((err, fieldsValue) => {
+			if (err || fieldsValue['empType'] === undefined) {
+				return (console.log('error/emptype null:::', fieldsValue['empType']))
+			}
 
-         const newEmp = {
-            empName: fieldsValue['empName'],
-            email: fieldsValue['email'],
-            password: fieldsValue['password'],
-            empType: fieldsValue['empType']
-         }
+			const newEmp = {
+				empName: fieldsValue['empName'],
+				email: fieldsValue['email'],
+				password: fieldsValue['password'],
+				empType: fieldsValue['empType']
+			}
 
-         console.log('NewEmployee received form values:: ', newEmp)
+			console.log('NewEmployee received form values:: ', newEmp)
 
-         this.props.addEmp(newEmp, this.props.history)
-      })
-   }
+			this.props.addEmp(newEmp, this.props.history)
+		})
+	}
 
-   render() {
+	render() {
 
-      //for layout
-      const { Header, Content, /*Footer*/ } = Layout;
+		//for layout
+		const { Header, Content, /*Footer*/ } = Layout;
 
-      const { getFieldDecorator } = this.props.form;
+		const { getFieldDecorator } = this.props.form;
 
-      const nameFieldDecorator = [{
-         rules: [{ required: true, message: "Please enter a name!" }]
-      }]
+		const nameFieldDecorator = [{
+			rules: [{ required: true, message: "Please enter a name!" }]
+		}]
 
-      const empTypeFieldDecorator = [{
-         rules: [{ required: true, message: "Please select an employee type!" }],
-         initialValue: 'Employee'
-      }]
+		const empTypeFieldDecorator = [{
+			rules: [{ required: true, message: "Please select an employee type!" }],
+			initialValue: 'Employee'
+		}]
 
-      const emailFieldDecorator = [{
-         rules: [{ required: true, message: "Please enter an email!" }]
-      }]
+		const emailFieldDecorator = [{
+			rules: [{ required: true, message: "Please enter an email!" }]
+		}]
 
-      const passwordFieldDecorator = [{
-         rules: [{ required: true, message: "Please enter a password!" }]
-      }]
+		const passwordFieldDecorator = [{
+			rules: [{ required: true, message: "Please enter a password!" }]
+		}]
 
-      return (
-         <Layout>
-            <Header>
-               <MenuHeader selectedKey='employees' />
-            </Header>
-            <Content>
-               <Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >
-                  <h1>New Employee</h1>
-                  <Form onSubmit={this.onSubmit}>
+		return (
+			<Layout>
+				<Header>
+					<MenuHeader selectedKey='employees' />
+				</Header>
+				<Content>
+					<Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >
+						<h1>New Employee</h1>
+						<Form onSubmit={this.onSubmit}>
 
-                     {/* employee name */}
-                     <Form.Item>
-                        {getFieldDecorator('empName', ...nameFieldDecorator)
-                           (<Input placeholder='Employee name' />)
-                        }
-                     </Form.Item>
+							{/* employee name */}
+							<Form.Item>
+								{getFieldDecorator('empName', ...nameFieldDecorator)
+									(<Input placeholder='Employee name' />)
+								}
+							</Form.Item>
 
-                     {/* email */}
-                     <Form.Item>
-                        {getFieldDecorator('email', ...emailFieldDecorator)
-                           (<Input placeholder='Email' />)
-                        }
-                     </Form.Item>
+							{/* email */}
+							<Form.Item>
+								{getFieldDecorator('email', ...emailFieldDecorator)
+									(<Input placeholder='Email' />)
+								}
+							</Form.Item>
 
-                     {/* password */}
-                     <Form.Item>
-                        {getFieldDecorator('password', ...passwordFieldDecorator)
-                           (<Input placeholder='Password' />)
-                        }
-                     </Form.Item>
+							{/* password */}
+							<Form.Item>
+								{getFieldDecorator('password', ...passwordFieldDecorator)
+									(<Input placeholder='Password' />)
+								}
+							</Form.Item>
 
-                     {/* employee type */}
-                     <Form.Item>
-                        {getFieldDecorator("empType", { ...empTypeFieldDecorator })(
-                           <Select
-                              placeholder="Employee type"
-                           >
-                              <Select.Option value="admin">Admin</Select.Option>
-                              <Select.Option value="employee">Employee</Select.Option>
-                           </Select>
-                        )}
-                     </Form.Item>
+							{/* employee type */}
+							<Form.Item>
+								{getFieldDecorator("empType", { ...empTypeFieldDecorator })(
+									<Select
+										placeholder="Employee type"
+									>
+										<Select.Option value="admin">Admin</Select.Option>
+										<Select.Option value="employee">Employee</Select.Option>
+									</Select>
+								)}
+							</Form.Item>
 
-                     {/* -----------buttons----------- */}
-                     <Row type="flex" justify="space-around">
-                        <Form.Item>
-                           <Button type="danger" >
-                              <Link to="/admin/employee/">
-                                 Cancel
+							{/* -----------buttons----------- */}
+							<Row type="flex" justify="space-around">
+								<Form.Item>
+									<Button type="danger" >
+										<Link to="/admin/employees/">
+											Cancel
                               </Link>
+									</Button>
+								</Form.Item>
+								<Form.Item>
+									<Button type="primary" htmlType="submit">
+										Submit
                            </Button>
-                        </Form.Item>
-                        <Form.Item>
-                           <Button type="primary" htmlType="submit">
-                              Submit
-                           </Button>
-                        </Form.Item>
-                     </Row>
-                  </Form>
-               </Col>
-            </Content>
-         </Layout>
-      )
-   }
+								</Form.Item>
+							</Row>
+						</Form>
+					</Col>
+				</Content>
+			</Layout>
+		)
+	}
 }
 
 export default compose(connect(null, { addEmp }), Form.create())(NewEmployee)

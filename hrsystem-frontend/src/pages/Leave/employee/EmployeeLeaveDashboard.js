@@ -8,104 +8,104 @@ import { connect } from 'react-redux'
 
 class EmployeeLeaveDashboard extends Component {
 
-   componentDidMount() {
-      console.log("EmployeeLeaveDashboard this.props.auth:: ", JSON.stringify(this.props.auth))
-      this.props.getEmpLeaves(this.props.auth.empId)
-   }
+	componentDidMount() {
+		console.log("EmployeeLeaveDashboard this.props.auth:: ", JSON.stringify(this.props.auth))
+		this.props.getEmpLeaves(this.props.auth.empId)
+	}
 
-   render() {
+	render() {
 
-      const { Header, Content, /*Footer*/ } = Layout;
+		const { Header, Content, /*Footer*/ } = Layout;
 
-      const { allLeaves } = this.props.allLeaves
+		const { allLeaves } = this.props.reduxLeave
 
-      //pending
-      let pendingLeaves = []
+		//pending
+		let pendingLeaves = []
 
-      //approved
-      let approvedLeaves = []
+		//approved
+		let approvedLeaves = []
 
-      //rejected
-      let rejectedLeaves = []
+		//rejected
+		let rejectedLeaves = []
 
-      const BoardAlgorithm = allLeaves => {
-         const cards = allLeaves.map(leave => (
-            <LeaveCard key={leave.id} leave={leave} empId={leave.empId} />
-         ))
+		const BoardAlgorithm = allLeaves => {
+			const cards = allLeaves.map(leaveDetails => (
+				<LeaveCard key={leaveDetails.id} leaveDetails={leaveDetails} empId={leaveDetails.empId} />
+			))
 
-         for (let i = 0; i < allLeaves.length; i++) {
-            if (cards[i].props.leave.status === "PENDING") {
-               pendingLeaves.push(cards[i])
-            }
-            if (cards[i].props.leave.status === "APPROVED") {
-               approvedLeaves.push(cards[i])
-            }
-            if (cards[i].props.leave.status === "REJECTED") {
-               rejectedLeaves.push(cards[i])
-            }
-         }
+			for (let i = 0; i < allLeaves.length; i++) {
+				if (cards[i].props.leaveDetails.status === "PENDING") {
+					pendingLeaves.push(cards[i])
+				}
+				if (cards[i].props.leaveDetails.status === "APPROVED") {
+					approvedLeaves.push(cards[i])
+				}
+				if (cards[i].props.leaveDetails.status === "REJECTED") {
+					rejectedLeaves.push(cards[i])
+				}
+			}
 
-         // if nothing in any column, <Empty /> is rendered instead
-         const nothing = <Empty key='nothing' />
-         if (pendingLeaves.length === 0) {
-            console.log('nothing in pending column')
-            pendingLeaves.push(nothing)
-         }
-         if (approvedLeaves.length === 0) {
-            console.log('nothing in approved column')
-            approvedLeaves.push(nothing)
-         }
-         if (rejectedLeaves.length === 0) {
-            console.log('nothing in rejected column')
-            rejectedLeaves.push(nothing)
-         }
+			// if nothing in any column, <Empty /> is rendered instead
+			const nothing = <Empty key='nothing' />
+			if (pendingLeaves.length === 0) {
+				console.log('nothing in pending column')
+				pendingLeaves.push(nothing)
+			}
+			if (approvedLeaves.length === 0) {
+				console.log('nothing in approved column')
+				approvedLeaves.push(nothing)
+			}
+			if (rejectedLeaves.length === 0) {
+				console.log('nothing in rejected column')
+				rejectedLeaves.push(nothing)
+			}
 
-         return (
-            <Col style={{ margin: '24px 24px 24px 24px' }}>
-               <Button type='primary' style={{ margin: '0 0 24px' }} >
-                  <Link to='/employee/leave/newLeave'>
-                     New leave
+			return (
+				<Col style={{ margin: '24px 24px 24px 24px' }}>
+					<Button type='primary' style={{ margin: '0 0 24px' }} >
+						<Link to='/employee/leave/newLeave'>
+							New leave
                   </Link>
-               </Button>
-               <Row gutter={16}>
-                  <Col span={8}>
-                     <Card title="Pending" >
-                        {pendingLeaves}
-                     </Card>
-                  </Col>
-                  <Col span={8}>
-                     <Card title="Approved" >
-                        {approvedLeaves}
-                     </Card>
-                  </Col>
-                  <Col span={8}>
-                     <Card title="Rejected" >
-                        {rejectedLeaves}
-                     </Card>
-                  </Col>
-               </Row>
-            </Col>
-         )
-      }
+					</Button>
+					<Row gutter={16}>
+						<Col span={8}>
+							<Card title="Pending" >
+								{pendingLeaves}
+							</Card>
+						</Col>
+						<Col span={8}>
+							<Card title="Approved" >
+								{approvedLeaves}
+							</Card>
+						</Col>
+						<Col span={8}>
+							<Card title="Rejected" >
+								{rejectedLeaves}
+							</Card>
+						</Col>
+					</Row>
+				</Col>
+			)
+		}
 
-      return (
-         <Layout>
-            <Header>
-               {/* pass props to choose default selected tab */}
-               <MenuHeader selectedKey="leave" />
-            </Header>
-            <Content>
-               {BoardAlgorithm(allLeaves)}
-            </Content>
-         </Layout>
-      )
-   }
+		return (
+			<Layout>
+				<Header>
+					{/* pass props to choose default selected tab */}
+					<MenuHeader selectedKey="leave" />
+				</Header>
+				<Content>
+					{BoardAlgorithm(allLeaves)}
+				</Content>
+			</Layout>
+		)
+	}
 }
 
 // mapping global state to local props
 const mapStateToProps = state => ({
-   auth: state.auth.employee,
-   allLeaves: state.leave
+	auth: state.auth.employee,
+	reduxLeave: state.reduxLeave
 })
 
 //connect component to global state

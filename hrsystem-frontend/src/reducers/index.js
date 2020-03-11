@@ -7,8 +7,8 @@ import employeesReducer from "./employeesReducer";
 
 
 export default combineReducers({
-   //authenticator: authenticatorReducer,
-   auth: authenticatorReducer,
-   leave: leavesReducer,
-   employee: employeesReducer
+	//authenticator: authenticatorReducer,
+	auth: authenticatorReducer,
+	reduxLeave: leavesReducer,
+	reduxEmployee: employeesReducer
 })

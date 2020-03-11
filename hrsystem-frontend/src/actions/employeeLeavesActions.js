@@ -3,10 +3,10 @@ import axios from 'axios'
 import { DELETE_LEAVE, GET_LEAVES, GET_LEAVE, POST_LEAVE } from "./types";
 
 //Add new leave---------------------------------------------------------
-export const addLeave = (leave, history) => async dispatch => {
+export const addLeave = (leaveDetails, history) => async dispatch => {
    //try {
-   console.log("addLeave leave:: ", leave)
-   const res = await axios.post("http://localhost:8080/hrsystemApi/leaves/employee/add", leave)
+   console.log("addLeave leaveDetails:: ", leaveDetails)
+   const res = await axios.post("http://localhost:8080/hrsystemApi/leaves/employee/add", leaveDetails)
    console.log('addLeave res:: ', res)
    dispatch({ type: POST_LEAVE, payload: res.data });
 

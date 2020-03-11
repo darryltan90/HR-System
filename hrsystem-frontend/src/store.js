@@ -10,20 +10,20 @@ let store;
 
 //if the browser is chrome and has redux dev tools extension
 if (window.navigator.userAgent.includes("Chrome") && ReactReduxDevTools) {
-   store = createStore(
-      rootReducer,
-      initialState,
-      compose(
-         applyMiddleware(...middleware),
-         ReactReduxDevTools
-      )
-   )
+	store = createStore(
+		rootReducer,
+		initialState,
+		compose(
+			applyMiddleware(...middleware),
+			ReactReduxDevTools
+		)
+	)
 } else {
-   store = createStore(
-      rootReducer,
-      initialState,
-      compose(applyMiddleware(...middleware))
-   )
+	store = createStore(
+		rootReducer,
+		initialState,
+		compose(applyMiddleware(...middleware))
+	)
 }
 
 export default store

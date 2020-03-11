@@ -7,128 +7,131 @@ import { connect } from 'react-redux'
 
 
 class AdminEmployeeDashboard extends Component {
-   componentDidMount() {
-      this.props.getAllEmp()
-   }
+	componentDidMount() {
+		this.props.getAllEmp()
+	}
 
-   onEditClick = employee => {
-      //dispatches the employee details to redux
-      this.props.getEmp(employee)
-   }
+	onEditClick = employeeDetails => {
+		//dispatches the employee details to redux
+		this.props.getEmp(employeeDetails)
+	}
 
-   onDeleteClick = employee => {
-      console.log('delete modal click::', employee)
+	onDeleteClick = employeeDetails => {
+		console.log('delete modal click::', employeeDetails)
 
-      const deleteEmp2 = this.props.deleteEmp
+		// idk why it does not work when being called directly
+		const deleteEmp2 = this.props.deleteEmp
 
-      Modal.confirm({
-         title: 'Are you sure you want to delete this employee?',
-         icon: <Icon
-            type='exclamation-circle'
-            style={{ fontSize: 'large' }}
-         />,
-         content:
-            <b>
-               ID: {employee.empId}<br />
-               Name: {employee.empName}<br />
-               Email: {employee.email}<br />
-               Type: {employee.empType}<br />
-            </b>,
-         okText: 'Yes',
-         okType: 'danger',
-         cancelText: 'No',
-         onOk() {
-            console.log('delete modal ok click:::', employee.empId)
-            deleteEmp2(employee.empId)
-         }
-      })
-   }
+		Modal.confirm({
+			title: 'Are you sure you want to delete this employee?',
+			icon:
+				<Icon
+					type='exclamation-circle'
+					style={{ fontSize: 'large' }}
+				/>,
+			content:
+				<b>
+					ID: {employeeDetails.empId}<br />
+               Name: {employeeDetails.empName}<br />
+               Email: {employeeDetails.email}<br />
+               Type: {employeeDetails.empType}<br />
+				</b>,
+			okText: 'Yes',
+			okType: 'danger',
+			cancelText: 'No',
+			onOk() {
+				console.log('delete modal ok click:::', employeeDetails.empId)
+				deleteEmp2(employeeDetails.empId)
+			}
+		})
+	}
 
-   render() {
-      const { Header, Content, /*Footer*/ } = Layout
+	render() {
+		const { Header, Content, /*Footer*/ } = Layout
 
-      console.log('AdminEmployeeDashboard this.props.employees::: ', this.props.employees)
+		console.log('AdminEmployeeDashboard this.props.allEmployees::: ', this.props.allEmployees)
 
-      // title, dataIndex, key, action
-      const columnDetails = [
-         { title: 'ID', dataIndex: 'empId', key: 'empId', width: 60, align: 'center' },
-         { title: 'Name', dataIndex: 'empName', key: 'empName' },
-         { title: 'Email', dataIndex: 'email', key: 'email', width: 400 },
-         {
-            title: 'Type',
-            dataIndex: 'empType',
-            key: 'empType',
-            width: 150,
-            render: empType => {
-               let color = empType === 'admin' ? 'green' : 'blue';
-               return (
-                  <Tag color={color} key={empType}>
-                     {empType.toUpperCase()}
-                  </Tag>
-               );
-            }
-         },
-         {
-            //employee will be used to link delete and edit
-            title: 'Actions', key: 'actions', render: (employee) =>
-               <Row justify='space-around'>
-                  <Col span={1}>
+		// title, dataIndex, key, action
+		const columnDetails = [
+			{ title: 'ID', dataIndex: 'empId', key: 'empId', width: 60, align: 'center' },
+			{ title: 'Name', dataIndex: 'empName', key: 'empName' },
+			{ title: 'Email', dataIndex: 'email', key: 'email', width: 400 },
+			{
+				title: 'Type',
+				dataIndex: 'empType',
+				key: 'empType',
+				width: 150,
+				render: empType => {
+					let color = empType === 'admin' ? 'green' : 'blue';
+					return (
+						<Tag color={color} key={empType}>
+							{empType.toUpperCase()}
+						</Tag>
+					);
+				}
+			},
+			{
+				//employee will be used to link delete and edit
+				title: 'Actions', key: 'actions', render: (employeeDetails) =>
+					<Row justify='space-around'>
+						<Col span={1}>
 
-                     <Icon
-                        type="delete"
-                        theme="twoTone"
-                        twoToneColor="red"
-                        style={{ fontSize: 'large' }}
-                        onClick={() => this.onDeleteClick(employee)}
-                     />
+							<Icon
+								type="delete"
+								theme="twoTone"
+								twoToneColor="red"
+								style={{ fontSize: 'large' }}
+								onClick={() => this.onDeleteClick(employeeDetails)}
+							/>
 
-                  </Col>
-                  <Col span={1} push={2}>
-                     <Link to='/admin/employee/updateEmployee'>
-                        <Icon
-                           type="edit"
-                           theme="twoTone"
-                           style={{ fontSize: 'large' }}
-                           //inline function needed to pass values
-                           onClick={() => this.onEditClick(employee)}
-                        />
+						</Col>
+						<Col span={1} push={2}>
+							<Link to='/admin/employees/updateEmployee'>
+								<Icon
+									type="edit"
+									theme="twoTone"
+									style={{ fontSize: 'large' }}
+									//inline function needed to pass values
+									onClick={() => this.onEditClick(employeeDetails)}
+								/>
+							</Link>
+						</Col>
+					</Row>
+
+			}
+		]
+
+		const empArr = [
+			...this.props.reduxEmployee.allEmployees
+		]
+
+		return (
+			<Layout>
+				<Header>
+					<MenuHeader selectedKey="employees" />
+				</Header>
+				<Content>
+					<Col span={20} style={{ margin: '50px 0px 24px 120px' }}>
+						<Button type='primary' style={{ marginBottom: '24px' }} >
+							<Link to='/admin/employees/newEmployee' >
+								New employee
                      </Link>
-                  </Col>
-               </Row>
-         }
-      ]
-
-      const empDetails = [
-         ...this.props.employees.employees
-      ]
-
-      return (
-         <Layout>
-            <Header>
-               <MenuHeader selectedKey="employees" />
-            </Header>
-            <Content>
-               <Col span={20} style={{ margin: '50px 0px 24px 120px' }}>
-                  <Button type='primary' style={{ marginBottom: '24px' }} >
-                     <Link to='/admin/employee/newEmployee' >
-                        New employee
-                     </Link>
-                  </Button>
-                  <Table
-                     dataSource={empDetails}
-                     columns={columnDetails}
-                     rowKey={row => row.empId}
-                     bordered
-                  />
-               </Col>
-            </Content>
-         </Layout>
-      )
-   }
+						</Button>
+						<Table
+							dataSource={empArr}
+							columns={columnDetails}
+							rowKey={row => row.empId}
+							bordered
+						/>
+					</Col>
+				</Content>
+			</Layout>
+		)
+	}
 }
 
 const mapStateToProps = state => ({
-   employees: state.employee
+	reduxEmployee: state.reduxEmployee
 })
 
 export default connect(mapStateToProps, { getAllEmp, getEmp, deleteEmp })(AdminEmployeeDashboard)

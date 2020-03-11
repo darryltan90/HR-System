@@ -12,164 +12,164 @@ import { compose } from 'redux';
 
 class UpdateLeave extends Component {
 
-   componentDidMount() {
-      const { leave_id } = this.props.match.params
-      const { empId } = this.props.auth
-      //console.log(this.props.match)
-      this.props.getLeave(empId, leave_id, this.props.history)
-      //console.log("this.props.auth", this.props.auth)
-   }
+	componentDidMount() {
+		const { leave_id } = this.props.match.params
+		const { empId } = this.props.auth
+		//console.log(this.props.match)
+		this.props.getLeave(empId, leave_id, this.props.history)
+		//console.log("this.props.auth", this.props.auth)
+	}
 
-   //when submit is clicked
-   onSubmit = e => {
-      e.preventDefault();
+	//when submit is clicked
+	onSubmit = e => {
+		e.preventDefault();
 
-      console.log('onSubmit this.state::: ', JSON.stringify(this.state))
+		console.log('onSubmit this.state::: ', JSON.stringify(this.state))
 
-      this.props.form.validateFields((err, fieldsValue) => {
-         if (err || fieldsValue['leave-type'] === undefined) {
-            return (
-               console.log('error/leave-type null:::', fieldsValue['leave-type'])
-            )
-         }
+		this.props.form.validateFields((err, fieldsValue) => {
+			if (err || fieldsValue['leave-type'] === undefined) {
+				return (
+					console.log('error/leave-type null:::', fieldsValue['leave-type'])
+				)
+			}
 
-         // Should format date value before submit.
-         const rangeValue = fieldsValue["range-picker"];
+			// Should format date value before submit.
+			const rangeValue = fieldsValue["range-picker"];
 
-         const updateLeave = {
-            "id": this.props.leave.leave.id,
-            "employee": this.props.auth,
-            "leaveType": fieldsValue['leave-type'],
-            "startDate": rangeValue[0].format("YYYY-MM-DD"),
-            "endDate": rangeValue[1].format("YYYY-MM-DD"),
-            "reason": fieldsValue['reason'],
-            "status": 'PENDING'
-         };
+			const updateLeave = {
+				"id": this.props.leaveDetails.id,
+				"employee": this.props.auth,
+				"leaveType": fieldsValue['leave-type'],
+				"startDate": rangeValue[0].format("YYYY-MM-DD"),
+				"endDate": rangeValue[1].format("YYYY-MM-DD"),
+				"reason": fieldsValue['reason'],
+				"status": 'PENDING'
+			};
 
-         console.log("Received values of form: ", updateLeave);
-         //here will submit form
-         this.props.addLeave(updateLeave, this.props.history)
-      });
-   };
+			console.log("Received values of form: ", updateLeave);
+			//here will submit form
+			this.props.addLeave(updateLeave, this.props.history)
+		});
+	};
 
-   disabledDate = (current) => {
-      // Cannot select days before today and today
-      return current && current < moment().endOf('day');
-   }
+	disabledDate = (current) => {
+		// Cannot select days before today and today
+		return current && current < moment().endOf('day');
+	}
 
-   render() {
+	render() {
 
-      console.log("UpdateLeave this.props: ", JSON.stringify(this.props))
-      console.log("UpdateLeave this.state: ", JSON.stringify(this.state))
+		console.log("UpdateLeave this.props: ", JSON.stringify(this.props))
+		console.log("UpdateLeave this.state: ", JSON.stringify(this.state))
 
-      //for layout
-      const { Header, Content, /*Footer*/ } = Layout;
+		//for layout
+		const { Header, Content, /*Footer*/ } = Layout;
 
-      const { getFieldDecorator } = this.props.form;
+		const { getFieldDecorator } = this.props.form;
 
-      // values from global state
-      const { leaveType, startDate, endDate, reason } = this.props.leave.leave
+		// values from global state
+		const { leaveType, startDate, endDate, reason } = this.props.leaveDetails
 
-      // fieldDecorator options for Datepicker.Rangepicker
-      const dateFormat = 'YYYY-MM-DD';
-      const rangePickerFieldDecorator = [{
-         rules: [{ type: "array", required: true, message: "Please select date!" }],
-         initialValue: [moment(startDate, dateFormat), moment(endDate, dateFormat)]
-      }];
+		// fieldDecorator options for Datepicker.Rangepicker
+		const dateFormat = 'YYYY-MM-DD';
+		const rangePickerFieldDecorator = [{
+			rules: [{ type: "array", required: true, message: "Please select date!" }],
+			initialValue: [moment(startDate, dateFormat), moment(endDate, dateFormat)]
+		}];
 
-      // fieldDecorator options for Select
-      const leaveTypeFieldDecorator = [{
-         rules: [{ required: true, message: "Please select leave type!" }],
-         initialValue: leaveType
-      }]
+		// fieldDecorator options for Select
+		const leaveTypeFieldDecorator = [{
+			rules: [{ required: true, message: "Please select leave type!" }],
+			initialValue: leaveType
+		}]
 
-      // fieldDecorator options for Select
-      const reasonFieldDecorator = [{
-         initialValue: reason
-      }]
+		// fieldDecorator options for Select
+		const reasonFieldDecorator = [{
+			initialValue: reason
+		}]
 
-      return (
-         <Layout>
-            <Header>
-               {/* pass props to choose default selected tab */}
-               <MenuHeader selectedKey='leave' />
-            </Header>
-            <Content>
-               <Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >
-                  <h1>Leave Request</h1>
-                  <Form onSubmit={this.onSubmit}>
-                     {/* -----------select menu----------- */}
-                     <Form.Item>
-                        {getFieldDecorator("leave-type", ...leaveTypeFieldDecorator)(
-                           <Select
-                              placeholder="Leave type"
-                           //value={this.state.leaveType}
-                           >
-                              <Select.Option value="Annual">Annual</Select.Option>
-                              <Select.Option value="Medical">Medical</Select.Option>
-                              <Select.Option value="Unpaid">Unpaid</Select.Option>
-                           </Select>
-                        )}
-                     </Form.Item>
+		return (
+			<Layout>
+				<Header>
+					{/* pass props to choose default selected tab */}
+					<MenuHeader selectedKey='leave' />
+				</Header>
+				<Content>
+					<Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >
+						<h1>Leave Request</h1>
+						<Form onSubmit={this.onSubmit}>
+							{/* -----------select menu----------- */}
+							<Form.Item>
+								{getFieldDecorator("leave-type", ...leaveTypeFieldDecorator)(
+									<Select
+										placeholder="Leave type"
+									//value={this.state.leaveType}
+									>
+										<Select.Option value="Annual">Annual</Select.Option>
+										<Select.Option value="Medical">Medical</Select.Option>
+										<Select.Option value="Unpaid">Unpaid</Select.Option>
+									</Select>
+								)}
+							</Form.Item>
 
-                     {/* -----------date range picker----------- */}
-                     <div style={{ margin: '24px' }} />
-                     <Form.Item>
-                        {getFieldDecorator("range-picker", ...rangePickerFieldDecorator)(<DatePicker.RangePicker
-                           disabledDate={this.disabledDate}
-                        //initialValue={[moment('2020-03-12', dateFormat), moment('2020-03-15', dateFormat)]}
-                        //format={dateFormat}
-                        />)}
-                     </Form.Item>
+							{/* -----------date range picker----------- */}
+							<div style={{ margin: '24px' }} />
+							<Form.Item>
+								{getFieldDecorator("range-picker", ...rangePickerFieldDecorator)(<DatePicker.RangePicker
+									disabledDate={this.disabledDate}
+								//initialValue={[moment('2020-03-12', dateFormat), moment('2020-03-15', dateFormat)]}
+								//format={dateFormat}
+								/>)}
+							</Form.Item>
 
-                     {/* -----------textarea----------- */}
-                     <div style={{ margin: '24px' }} />
-                     <Form.Item>
-                        {getFieldDecorator('reason', ...reasonFieldDecorator)
-                           (<TextArea
-                              placeholder="Reason for leave"
-                              allowClear //gives the X button on top right
-                              autoSize={{ minRows: 6, maxRows: 6, }} //fixes row at 6
-                           />)
-                        }
+							{/* -----------textarea----------- */}
+							<div style={{ margin: '24px' }} />
+							<Form.Item>
+								{getFieldDecorator('reason', ...reasonFieldDecorator)
+									(<TextArea
+										placeholder="Reason for leave"
+										allowClear //gives the X button on top right
+										autoSize={{ minRows: 6, maxRows: 6, }} //fixes row at 6
+									/>)
+								}
 
-                     </Form.Item>
+							</Form.Item>
 
-                     {/* -----------buttons----------- */}
-                     <Row type="flex" justify="space-around">
-                        <Form.Item>
-                           <Button type="danger" >
-                              <Link to="/employee/leave/">
-                                 Cancel
+							{/* -----------buttons----------- */}
+							<Row type="flex" justify="space-around">
+								<Form.Item>
+									<Button type="danger" >
+										<Link to="/employee/leave/">
+											Cancel
                               </Link>
-                           </Button>
-                        </Form.Item>
-                        <Form.Item>
-                           <Button type="primary" htmlType="submit">
-                              Submit
+									</Button>
+								</Form.Item>
+								<Form.Item>
+									<Button type="primary" htmlType="submit">
+										Submit
                         </Button>
-                        </Form.Item>
-                     </Row>
-                  </Form>
-                  <div style={{ margin: '24px' }} />
-               </Col>
-            </Content>
-         </Layout>
-      )
-   }
+								</Form.Item>
+							</Row>
+						</Form>
+						<div style={{ margin: '24px' }} />
+					</Col>
+				</Content>
+			</Layout>
+		)
+	}
 }
 
 //functions and objects need for this component
 UpdateLeave.propTypes = {
-   leave: PropTypes.object.isRequired,
-   addLeave: PropTypes.func.isRequired,
-   getLeave: PropTypes.func.isRequired,
+	leaveDetails: PropTypes.object.isRequired,
+	addLeave: PropTypes.func.isRequired,
+	getLeave: PropTypes.func.isRequired,
 }
 
 //global state(redux), apply to local props
 const mapStateToProps = state => ({
-   auth: state.auth.employee,
-   leave: state.leave,
+	auth: state.auth.employee,
+	leaveDetails: state.reduxLeave.leaveDetails,
 })
 
 export default compose(connect(mapStateToProps, { getLeave, addLeave }), Form.create())(UpdateLeave)

@@ -59,7 +59,7 @@ class MenuHeader extends Component {
                   }
                   {this.props.auth.empType === "admin" ?
                      <Menu.Item key='employees'>
-                        <Link to='/admin/employee/'>
+                        <Link to='/admin/employees/'>
                            Employees
                         </Link>
                      </Menu.Item> :

@@ -1,4 +1,4 @@
-----------------------------------------------TO DO----------------------------------------------
+-----------------------------------------------TO DO-----------------------------------------------
 ***************(frontend - all forms)***************
 update antd to v4
 change all form validations to new method
@@ -31,24 +31,20 @@ change selectedKey employee to employees, ***do this for all files containing Me
 
 (frontend - BrowserRouter as Router)
 reduce url length by using 'basename'
--------------------------------------------IN PROGRESS-------------------------------------------
+--------------------------------------------IN PROGRESS--------------------------------------------
+(frontend - leaveCard)
+change how update functions, instead of calling API again, use data from redux
+
 (frontend - redux)
 use useState to update status(pending...) instead of changing whole redux state
 try to change editLeave to use 'leave' from 'leaves' instead of getting whole leave again
-change auth: remove admin option
-(try to find all using this.props.[name here])
-change 'leave' to 'reduxLeave'
-change leave: rename 'leaves' to 'allLeaves'
-change leave: rename 'leave' to 'leaveDetails'
-change 'auth.employee' to 'auth.user'
-change 'employee' to 'reduxEmployee'
 
-changed 'leaves' to 'allLeaves'
-changing 'leave' to 'leaveDetails'
+------------------------------------------------DONE-----------------------------------------------
 
------------------------------------------------DONE----------------------------------------------
-(frontend - admin)(DONE)
-add view all employee page
+changed 'leave' to 'reduxLeave'
+changed 'leave.leaves' to 'allLeaves'
+changed 'leave.leave' to 'leaveDetails'
 
-(frontend - admin)
-CRUD operations for addEmployee page
+changed 'employee' to 'reduxEmployee'
+changed 'employee.employees' to 'allEmployees'
+changed 'employee.employee' to 'employeeDetails'

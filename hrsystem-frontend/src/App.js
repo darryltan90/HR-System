@@ -16,43 +16,43 @@ import UpdateEmployee from './pages/Leave/admin/UpdateEmployee';
 
 class App extends Component {
 
-   //not used yet
-   redirectToLogin = () => {
-      return (
-         <Redirect to='/' />
-      )
-   }
+	//not used yet
+	redirectToLogin = () => {
+		return (
+			<Redirect to='/' />
+		)
+	}
 
-   render() {
-      return (
-         <Provider store={store}>
-            <Router>
-               <div>
-                  {/* Log in page */}
-                  <Route exact path='/' component={Login} />
+	render() {
+		return (
+			<Provider store={store}>
+				<Router>
+					<div>
+						{/* Log in page */}
+						<Route exact path='/' component={Login} />
 
-                  {/* public pages */}
-                  <Route exact path='/calendar/' component={CalendarDashboard} />
+						{/* public pages */}
+						<Route exact path='/calendar/' component={CalendarDashboard} />
 
-                  {/* ----------------EMPLOYEE PAGES---------------- */}
-                  {/* leaves */}
-                  <Route exact path='/employee/leave/' component={EmployeeLeaveDashboard} />
-                  <Route exact path='/employee/leave/newLeave' component={NewLeave} />
-                  <Route exact path='/employee/leave/updateLeave/:leave_id' component={UpdateLeave} />
+						{/* ----------------EMPLOYEE PAGES---------------- */}
+						{/* leaves */}
+						<Route exact path='/employee/leave/' component={EmployeeLeaveDashboard} />
+						<Route exact path='/employee/leave/newLeave' component={NewLeave} />
+						<Route exact path='/employee/leave/updateLeave/:leave_id' component={UpdateLeave} />
 
-                  {/* ----------------ADMIN PAGES---------------- */}
-                  {/* leaves */}
-                  <Route exact path='/admin/leave/' component={AdminLeaveDashboard} />
-                  {/* employees */}
-                  <Route exact path='/admin/employee/' component={AdminEmployeeDashboard} />
-                  <Route exact path='/admin/employee/newEmployee' component={NewEmployee} />
-                  <Route exact path='/admin/employee/updateEmployee' component={UpdateEmployee} />
+						{/* ----------------ADMIN PAGES---------------- */}
+						{/* leaves */}
+						<Route exact path='/admin/leave/' component={AdminLeaveDashboard} />
+						{/* employees */}
+						<Route exact path='/admin/employees/' component={AdminEmployeeDashboard} />
+						<Route exact path='/admin/employees/newEmployee' component={NewEmployee} />
+						<Route exact path='/admin/employees/updateEmployee' component={UpdateEmployee} />
 
-               </div>
-            </Router>
-         </Provider>
-      )
-   }
+					</div>
+				</Router>
+			</Provider>
+		)
+	}
 }
 
 export default App;
