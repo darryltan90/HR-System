@@ -11,40 +11,25 @@ make the onSubmit button also display error message of AntD on top (AntD Message
 (frontend - all new and update forms)
 merge new and update forms together for less pages
 
-(frontend - CALENDAR)
-shows whoever is on leave
-
 (frontend - all dashboards)
 change card color to something darker(easier to see)
 change each row color (pending to yellow; approved to green; rejected to red)
 
-(frontend - all(redirect))
-each page must redirect to login if no user details found
-try to not show id in updateLeaves page
-
 (backend - Leave.java)
 change date data type(refer to email)
-
-(frontend - MenuHeader)
-change selectedKey employee to employees, ***do this for all files containing MenuHeader***
-***also change the link in App.js and all relevant buttons***
 
 (frontend - BrowserRouter as Router)
 reduce url length by using 'basename'
 --------------------------------------------IN PROGRESS--------------------------------------------
-(frontend - leaveCard)
-change how update functions, instead of calling API again, use data from redux
 
-(frontend - redux)
-use useState to update status(pending...) instead of changing whole redux state
-try to change editLeave to use 'leave' from 'leaves' instead of getting whole leave again
+(frontend - CALENDAR)
+shows whoever is on leave
+
+(frontend - all(redirect))
+each page must redirect to login if no user details found
 
 ------------------------------------------------DONE-----------------------------------------------
 
-changed 'leave' to 'reduxLeave'
-changed 'leave.leaves' to 'allLeaves'
-changed 'leave.leave' to 'leaveDetails'
-
-changed 'employee' to 'reduxEmployee'
-changed 'employee.employees' to 'allEmployees'
-changed 'employee.employee' to 'employeeDetails'
+(frontend - leaveCard)
+changed how updateLeave functions, instead of calling API again, use data from redux
+id is not shown in updateLeave url anymore

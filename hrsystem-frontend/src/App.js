@@ -38,7 +38,7 @@ class App extends Component {
 						{/* leaves */}
 						<Route exact path='/employee/leave/' component={EmployeeLeaveDashboard} />
 						<Route exact path='/employee/leave/newLeave' component={NewLeave} />
-						<Route exact path='/employee/leave/updateLeave/:leave_id' component={UpdateLeave} />
+						<Route exact path='/employee/leave/updateLeave/' component={UpdateLeave} />
 
 						{/* ----------------ADMIN PAGES---------------- */}
 						{/* leaves */}

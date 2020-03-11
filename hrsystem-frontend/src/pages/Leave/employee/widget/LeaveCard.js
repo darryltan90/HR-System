@@ -4,7 +4,7 @@ import Meta from 'antd/lib/card/Meta'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import { deleteLeave } from "../../../../actions/employeeLeavesActions";
+import { deleteLeave, getLeave } from "../../../../actions/employeeLeavesActions";
 
 class LeaveCard extends Component {
 
@@ -14,20 +14,24 @@ class LeaveCard extends Component {
 		this.props.deleteLeave(leaveId, empId, "employee")
 	}
 
+	onEditClick = leaveDetails => {
+		this.props.getLeave(leaveDetails)
+	}
+
 	render() {
 		//leave defracturing
-		const { id, leaveType, startDate, endDate, reason, status, employee } = this.props.leaveDetails
-		console.log("LeaveCard status::: ", JSON.stringify(status))
-		console.log("LeaveCard empId::: ", employee.empId)
+		const { leaveDetails } = this.props
+		console.log("LeaveCard status::: ", JSON.stringify(leaveDetails.status))
+		console.log("LeaveCard empId::: ", leaveDetails.employee.empId)
 
-		if (status === 'APPROVED' || status === 'REJECTED') {
+		if (leaveDetails.status === 'APPROVED' || leaveDetails.status === 'REJECTED') {
 			return (
 				<Card style={{ width: 435, marginTop: 16 }}>
 					<Meta
-						title={leaveType}
-						description={`${startDate} - ${endDate}`}
+						title={leaveDetails.leaveType}
+						description={`${leaveDetails.startDate} - ${leaveDetails.endDate}`}
 					/>
-					<p>{reason}</p>
+					<p>{leaveDetails.reason}</p>
 				</Card>
 			)
 		}
@@ -42,8 +46,8 @@ class LeaveCard extends Component {
 						okText="Yes"
 						cancelText="No"
 						// either 1 works
-						// onConfirm={() => this.onDeleteClick(id, employee.empId)}
-						onConfirm={this.onDeleteClick.bind(this, id, employee.empId)}
+						// onConfirm={() => this.onDeleteClick(leaveDetails.id, leaveDetails.employee.empId)}
+						onConfirm={this.onDeleteClick.bind(this, leaveDetails.id, leaveDetails.employee.empId)}
 					>
 						<Icon
 							type="delete"
@@ -53,21 +57,22 @@ class LeaveCard extends Component {
 						/>
 					</Popconfirm>
 					,
-					<Link to={`/employee/leave/updateLeave/${id}`}>
+					<Link to={`/employee/leave/updateLeave`}>
 						<Icon
 							type="edit"
 							theme="twoTone"
 							style={{ fontSize: 'large' }}
+							onClick={() => this.onEditClick(leaveDetails)}
 						/>
 					</Link>
 				]}
 			>
 				<Meta
-					title={leaveType}
-					description={`${startDate} - ${endDate}`}
+					title={leaveDetails.leaveType}
+					description={`${leaveDetails.startDate} - ${leaveDetails.endDate}`}
 				/>
 				<p>
-					{reason}
+					{leaveDetails.reason}
 				</p>
 			</Card>
 		)
@@ -75,7 +80,8 @@ class LeaveCard extends Component {
 }
 
 LeaveCard.propTypes = {
-	deleteLeave: PropTypes.func.isRequired
+	deleteLeave: PropTypes.func.isRequired,
+	getLeave: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteLeave })(LeaveCard)
+export default connect(null, { deleteLeave, getLeave })(LeaveCard)

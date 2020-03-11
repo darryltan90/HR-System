@@ -12,14 +12,6 @@ import { compose } from 'redux';
 
 class UpdateLeave extends Component {
 
-	componentDidMount() {
-		const { leave_id } = this.props.match.params
-		const { empId } = this.props.auth
-		//console.log(this.props.match)
-		this.props.getLeave(empId, leave_id, this.props.history)
-		//console.log("this.props.auth", this.props.auth)
-	}
-
 	//when submit is clicked
 	onSubmit = e => {
 		e.preventDefault();

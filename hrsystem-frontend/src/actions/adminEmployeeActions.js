@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { POST_EMP, GET_ALL_EMP, DELETE_EMP, GET_EMP } from "./types";
-import { Redirect } from 'react-router-dom';
 
 // Add/Update employee
 export const addEmp = (employeeDetails, history) => async dispatch => {
