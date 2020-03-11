@@ -13,6 +13,7 @@ import AdminEmployeeDashboard from './pages/Leave/admin/AdminEmployeesDashboard'
 import CalendarDashboard from './pages/CalendarDashboard';
 import NewEmployee from './pages/Leave/admin/NewEmployee';
 import UpdateEmployee from './pages/Leave/admin/UpdateEmployee';
+import PrivateRoute from './PrivateRoute';
 
 class App extends Component {
 
@@ -36,17 +37,17 @@ class App extends Component {
 
 						{/* ----------------EMPLOYEE PAGES---------------- */}
 						{/* leaves */}
-						<Route exact path='/employee/leave/' component={EmployeeLeaveDashboard} />
-						<Route exact path='/employee/leave/newLeave' component={NewLeave} />
-						<Route exact path='/employee/leave/updateLeave/' component={UpdateLeave} />
+						<PrivateRoute exact path='/employee/leave/' component={EmployeeLeaveDashboard} />
+						<PrivateRoute exact path='/employee/leave/newLeave' component={NewLeave} />
+						<PrivateRoute exact path='/employee/leave/updateLeave/' component={UpdateLeave} />
 
 						{/* ----------------ADMIN PAGES---------------- */}
 						{/* leaves */}
-						<Route exact path='/admin/leave/' component={AdminLeaveDashboard} />
+						<PrivateRoute exact path='/admin/leave/' component={AdminLeaveDashboard} />
 						{/* employees */}
-						<Route exact path='/admin/employees/' component={AdminEmployeeDashboard} />
-						<Route exact path='/admin/employees/newEmployee' component={NewEmployee} />
-						<Route exact path='/admin/employees/updateEmployee' component={UpdateEmployee} />
+						<PrivateRoute exact path='/admin/employees/' component={AdminEmployeeDashboard} />
+						<PrivateRoute exact path='/admin/employees/newEmployee' component={NewEmployee} />
+						<PrivateRoute exact path='/admin/employees/updateEmployee' component={UpdateEmployee} />
 
 					</div>
 				</Router>
