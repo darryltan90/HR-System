@@ -18,18 +18,13 @@ change each row color (pending to yellow; approved to green; rejected to red)
 (backend - Leave.java)
 change date data type(refer to email)
 
-(frontend - CALENDAR)
-shows whoever is on leave
-
 (frontend - BrowserRouter as Router)
 reduce url length by using 'basename'
 --------------------------------------------IN PROGRESS--------------------------------------------
 
-(frontend - all(redirect))
-each page must redirect to login if no user details found
+(frontend - CALENDAR)
+shows whoever is on leave
+
+use FullCalendar
 
 ------------------------------------------------DONE-----------------------------------------------
-
-(frontend - leaveCard)
-changed how updateLeave functions, instead of calling API again, use data from redux
-id is not shown in updateLeave url anymore
