@@ -13,6 +13,8 @@ export const DELETE_LEAVE = "DELETE_LEAVE";
 
 export const POST_LEAVE = "POST_LEAVE";
 
+export const GET_LEAVES_BY_STATUS = "GET_LEAVES_BY_STATUS"
+
 //ADMIN ACTIONS
 export const POST_EMP = 'POST_EMP';
 

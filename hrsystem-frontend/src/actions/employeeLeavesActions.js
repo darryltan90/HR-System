@@ -1,6 +1,6 @@
 //used to manage api calls
 import axios from 'axios'
-import { DELETE_LEAVE, GET_LEAVES, GET_LEAVE, POST_LEAVE } from "./types";
+import { DELETE_LEAVE, GET_LEAVES, GET_LEAVE, POST_LEAVE, GET_LEAVES_BY_STATUS } from "./types";
 
 //Add new leave---------------------------------------------------------
 export const addLeave = (leaveDetails, history) => async dispatch => {
@@ -22,29 +22,18 @@ export const getEmpLeaves = (empId) => async dispatch => {
 }
 
 //Delete leave----------------------------------------------------------
-export const deleteLeave = (leaveId, empId, userType) => async dispatch => {
-	await axios.delete(`http://localhost:8080/hrsystemApi/leaves/${userType}/deleteById/${empId}/${leaveId}`)//delete by id
+export const deleteLeave = (leaveId, empId) => async dispatch => {
+	await axios.delete(`http://localhost:8080/hrsystemApi/leaves/employee/deleteById/${empId}/${leaveId}`)//delete by id
 	dispatch({ type: DELETE_LEAVE, payload: leaveId })
-}
-
-//Update leave----------------------------------------------------------
-export const getLeavess = (empId, leaveId, history) => async dispatch => {
-	console.log("empId::: ", empId)
-	console.log("leaveId::: ", leaveId)
-	try {
-		const res = await axios.get(`http://localhost:8080/hrsystemApi/leaves/employee/getLeave/${empId}/${leaveId}`)
-		dispatch({
-			type: GET_LEAVE,
-			payload: res.data
-		})
-		console.log("getLeave res::: ", res)
-	} catch (error) {
-		//history.push("/")
-		console.log('getLeave error:::', error)
-	}
 }
 
 // dispatch leave details to redux
 export const getLeave = leaveDetails => {
 	return { type: GET_LEAVE, payload: leaveDetails }
+}
+
+// get leaves for calendar
+export const getLeaveByStatus = (status) => async dispatch => {
+	const res = await axios.get(`http://localhost:8080/hrsystemApi/leaves/employee/getByStatus/${status}`)
+	dispatch({ type: GET_LEAVES_BY_STATUS, payload: res.data })
 }

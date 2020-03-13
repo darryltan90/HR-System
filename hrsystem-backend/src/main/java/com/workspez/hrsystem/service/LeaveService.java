@@ -42,4 +42,8 @@ public class LeaveService {
 		leaveRepo.deleteLeavesByEmpId(empId);
 	}
 	
+	public Iterable<Leave> findAllLeavesByStatus(String status) {
+		return leaveRepo.findAllLeavesByStatus(status);
+	}
+	
 }

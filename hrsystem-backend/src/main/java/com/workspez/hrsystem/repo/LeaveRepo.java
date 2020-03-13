@@ -27,4 +27,7 @@ public interface LeaveRepo extends JpaRepository<Leave, Long>{
 	@Query(value = "DELETE FROM leaves WHERE emp_id=:empId", nativeQuery = true)
 	void deleteLeavesByEmpId(@Param("empId") int empId);
 	
+	@Query(value = " SELECT * FROM leaves WHERE status =:status", nativeQuery = true)
+	Iterable<Leave> findAllLeavesByStatus(@Param("status") String status);
+	
 }

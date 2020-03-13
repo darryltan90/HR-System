@@ -1,23 +1,38 @@
 import React, { Component } from 'react'
-import { Calendar, Layout } from 'antd'
+import { Layout, Col } from 'antd'
+// import Calendar from 'tui-calendar'
 import MenuHeader from '../components/MenuHeader'
+import CalendarTUI from '../components/CalendarTUI';
+import Calendar from 'tui-calendar';
+
+
 
 class CalendarDashboard extends Component {
+
 	render() {
 
-		const { Header, Content } = Layout
+		const { Header, Content, Footer } = Layout
 
 		return (
 			<Layout>
-				<Header>
+				<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
 					<MenuHeader selectedKey='calendar' />
 				</Header>
 				<Content>
-					<Calendar />
+					{/* <Calendar /> */}
+					<Col span={20} offset={2} style={{ marginTop: '100px', marginBottom: '50px' }}>
+						<CalendarTUI calType="dashboard" />
+					</Col>
 				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 	}
 }
+
+
+
 
 export default CalendarDashboard

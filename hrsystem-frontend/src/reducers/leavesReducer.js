@@ -1,8 +1,9 @@
-import { GET_LEAVES, DELETE_LEAVE, GET_LEAVE, POST_LEAVE, USER_LOGOUT } from "../actions/types";
+import { GET_LEAVES, DELETE_LEAVE, GET_LEAVE, POST_LEAVE, USER_LOGOUT, GET_LEAVES_BY_STATUS, } from "../actions/types";
 
 const initialState = {
 	allLeaves: [],
-	leaveDetails: {}
+	leaveDetails: {},
+	calendarLeaves: []
 }
 
 export default function (state = initialState, action) {
@@ -37,6 +38,12 @@ export default function (state = initialState, action) {
 					),
 					action.payload
 				]
+			}
+
+		case GET_LEAVES_BY_STATUS:
+			return {
+				...state,
+				calendarLeaves: action.payload
 			}
 
 		case USER_LOGOUT:

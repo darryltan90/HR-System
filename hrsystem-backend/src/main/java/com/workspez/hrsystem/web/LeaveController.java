@@ -69,6 +69,11 @@ public class LeaveController {
 		return new ResponseEntity<String>("Leave deleted", HttpStatus.OK);
 	}
 	
+	@GetMapping("employee/getByStatus/{status}")
+	public Iterable<Leave> findAllLeavesByStatus(@PathVariable String status){
+		return leaveService.findAllLeavesByStatus(status);
+	}
+	
 	//=============================================================================================================
 	
 	//-------------------ADMIN-------------------//

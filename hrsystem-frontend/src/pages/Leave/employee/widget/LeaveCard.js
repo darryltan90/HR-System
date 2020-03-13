@@ -11,7 +11,7 @@ class LeaveCard extends Component {
 	onDeleteClick = (leaveId, empId) => {
 		console.log("leaveId:: ", leaveId)
 		console.log("empId:: ", empId)
-		this.props.deleteLeave(leaveId, empId, "employee")
+		this.props.deleteLeave(leaveId, empId)
 	}
 
 	onEditClick = leaveDetails => {

@@ -33,13 +33,13 @@ class App extends Component {
 						<Route exact path='/' component={Login} />
 
 						{/* public pages */}
-						<Route exact path='/calendar/' component={CalendarDashboard} />
+						<Route exact path='/calendar' component={CalendarDashboard} />
 
 						{/* ----------------EMPLOYEE PAGES---------------- */}
 						{/* leaves */}
 						<PrivateRoute exact path='/employee/leave/' component={EmployeeLeaveDashboard} />
 						<PrivateRoute exact path='/employee/leave/newLeave' component={NewLeave} />
-						<PrivateRoute exact path='/employee/leave/updateLeave/' component={UpdateLeave} />
+						<PrivateRoute exact path='/employee/leave/updateLeave' component={UpdateLeave} />
 
 						{/* ----------------ADMIN PAGES---------------- */}
 						{/* leaves */}
