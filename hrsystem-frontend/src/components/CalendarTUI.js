@@ -15,8 +15,16 @@ class CalendarTUI extends Component {
 
 	calendarRef = React.createRef()
 
+	constructor() {
+		super()
+		this.state = {
+			stateDate: ''
+		}
+	}
+
 	componentDidMount() {
 		this.props.getLeaveByStatus('APPROVED')
+		this.getDate('today')
 	}
 
 	navigateCal = action => {
@@ -24,16 +32,58 @@ class CalendarTUI extends Component {
 		switch (action) {
 			case 'next':
 				calendarInstance.next()
+				this.getDate('next')
 				break
 
 			case 'prev':
 				calendarInstance.prev()
+				this.getDate('prev')
 				break
 
 			case 'today':
 				calendarInstance.today()
+				this.getDate('next')
+				break
+
+			default: break
+		}
+	}
+
+	getDate = (when) => {
+
+		var tempDate = new Date()
+		var splitDate = []
+		var splitInt1 = 0
+
+		console.log('when:::', when)
+
+		switch (when) {
+			case 'today':
+				var date = tempDate.getFullYear() + '-' + (tempDate.getMonth() + 1)
+				this.setState({ stateDate: date })
+				break
+
+			case 'next':
+				//splits the current date into [year, month]
+				splitDate = this.state.stateDate.split('-')
+				splitInt1 = (parseInt(splitDate[1], 10) + 1)
+				this.setState({ stateDate: splitDate[0] + '-' + (splitInt1 === 13 ? 1 : splitInt1).toString })
+				////////////////////////////////////////////////////////////////////////////////////////
+				break
+
+			case 'prev':
+				//splits the current date into [year, month]
+				splitDate = this.state.stateDate.split('-')
+				splitInt1 = (parseInt(splitDate[1], 10) - 1)
+				console.log('splitInt1', splitInt1)
+				this.setState({ stateDate: splitDate[0] + '-' + (splitInt1 === 0 ? 12 : splitInt1).toString })
+				break
+
+			default:
+				console.log('**getDate error**')
 				break
 		}
+
 	}
 
 	render() {
@@ -67,6 +117,7 @@ class CalendarTUI extends Component {
 
 		return (
 			<div>
+				<h1>{this.state.stateDate}</h1>
 				<button onClick={() => this.navigateCal('prev')}>Previous month</button>
 				<button onClick={() => this.navigateCal('next')}>Next month</button>
 				<button onClick={() => this.navigateCal('today')}>Current month</button>
@@ -85,11 +136,11 @@ class CalendarTUI extends Component {
 
 							return '<span class="' + classNames.join(' ') + '">' + date + '</span>';
 						},
-						milestone(schedule) {
-							return `<span style="color:#fff;background-color: ${schedule.bgColor};">${
-								schedule.title
-								}</span>`
-						},
+						// milestone(schedule) {
+						// 	return `<span style="color:#fff;background-color: ${schedule.bgColor};">${
+						// 		schedule.title
+						// 		}</span>`
+						// },
 						// makes the days capital letters
 						// monthDayname(model) {
 						// 	console.log('monthDayName model:::', model)

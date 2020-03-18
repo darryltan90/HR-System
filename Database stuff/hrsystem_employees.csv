@@ -1,6 +1,10 @@
 emp_id,emp_name,email,password,emp_type
-1,darryl,darryl@workspez.com,123,admin
-2,eunbi,eunbi@workspez.com,456,employee
+1,darryl,darryl@workspez.com,darryl,admin
+2,eunbi,eunbi@workspez.com,eunbi,employee
 3,emp3,emp3@email.com,emp3,employee
 4,emp4,emp4@email.com,emp4,employee
 5,admin5,admin5@email.com,admin5,admin
+6,emp6,emp6@email.com,emp6,employee
+7,emp7,emp7@email.com,emp7,employee
+12,emp12,emp12@email.com,emp12,employee
+13,empredux,empredux@email.com,empredux,employee

@@ -14,3 +14,7 @@ next line",REJECTED
 22,2,Medical,2020-03-23,2020-03-26,"empId 2 eunbi",REJECTED
 24,1,Medical,2020-03-05,2020-03-07,"too sleepy",APPROVED
 25,2,Unpaid,2020-03-05,2020-03-07,"go school",PENDING
+29,1,Medical,2020-03-11,2020-03-12,"test updated",PENDING
+37,3,Medical,2020-03-25,2020-03-26,emp3test,PENDING
+39,3,Unpaid,2020-03-19,2020-03-24,wwwwwwwwwwwwwwwwww,APPROVED
+40,3,Annual,2020-04-20,2020-04-21,NULL,REJECTED
