@@ -27,33 +27,39 @@ class CalendarTUI extends Component {
 		this.getDate('today')
 	}
 
+	// navigating the calendar
 	navigateCal = action => {
 		const calendarInstance = this.calendarRef.current.getInstance()
 		switch (action) {
 			case 'next':
 				calendarInstance.next()
 				this.getDate('next')
-				break
+				return
 
 			case 'prev':
 				calendarInstance.prev()
 				this.getDate('prev')
-				break
+				return
 
 			case 'today':
 				calendarInstance.today()
-				this.getDate('next')
-				break
+				this.getDate('today')
+				return
 
 			default: break
 		}
+
+		console.log('test return here:::::')
+
 	}
 
+	// to show the month and year
 	getDate = (when) => {
 
 		var tempDate = new Date()
 		var splitDate = []
-		var splitInt1 = 0
+		var splitMonth = 0
+		var splitYear = 0
 
 		console.log('when:::', when)
 
@@ -66,17 +72,29 @@ class CalendarTUI extends Component {
 			case 'next':
 				//splits the current date into [year, month]
 				splitDate = this.state.stateDate.split('-')
-				splitInt1 = (parseInt(splitDate[1], 10) + 1)
-				this.setState({ stateDate: splitDate[0] + '-' + (splitInt1 === 13 ? 1 : splitInt1).toString })
-				////////////////////////////////////////////////////////////////////////////////////////
+				splitYear = parseInt(splitDate[0], 10)
+				splitMonth = (parseInt(splitDate[1], 10) + 1)
+				
+				if (splitMonth === 13) {
+					splitMonth = 1
+					splitYear++
+				}
+
+				this.setState({ stateDate: splitYear + '-' + splitMonth })
 				break
 
 			case 'prev':
 				//splits the current date into [year, month]
 				splitDate = this.state.stateDate.split('-')
-				splitInt1 = (parseInt(splitDate[1], 10) - 1)
-				console.log('splitInt1', splitInt1)
-				this.setState({ stateDate: splitDate[0] + '-' + (splitInt1 === 0 ? 12 : splitInt1).toString })
+				splitYear = parseInt(splitDate[0], 10)
+				splitMonth = (parseInt(splitDate[1], 10) - 1)
+
+				if (splitMonth === 0) {
+					splitMonth = 12
+					splitYear--
+				}
+				
+				this.setState({ stateDate: splitYear+ '-' + splitMonth})
 				break
 
 			default:
@@ -121,32 +139,23 @@ class CalendarTUI extends Component {
 				<button onClick={() => this.navigateCal('prev')}>Previous month</button>
 				<button onClick={() => this.navigateCal('next')}>Next month</button>
 				<button onClick={() => this.navigateCal('today')}>Current month</button>
+				{/* dropdown menu to select month/year */}
 				<Calendar
 					ref={this.calendarRef}
 					{...calendarOptions}
 					schedules={testCalSchedule}
-					template={{
-						monthGridHeader(dayModel) {
-							var date = parseInt(dayModel.date.split('-')[2], 10);
-							var classNames = ['tui-full-calendar-weekday-grid-date '];
-
-							if (dayModel.isToday) {
-								classNames.push('tui-full-calendar-weekday-grid-date-decorator');
-							}
-
-							return '<span class="' + classNames.join(' ') + '">' + date + '</span>';
-						},
-						// milestone(schedule) {
-						// 	return `<span style="color:#fff;background-color: ${schedule.bgColor};">${
-						// 		schedule.title
-						// 		}</span>`
-						// },
-						// makes the days capital letters
-						// monthDayname(model) {
-						// 	console.log('monthDayName model:::', model)
-						// 	return (model.label).toString().toLocaleUpperCase();
-						// }
-					}}
+					// template={{
+					// 	milestone(schedule) {
+					// 		return `<span style="color:#fff;background-color: ${schedule.bgColor};">${
+					// 			schedule.title
+					// 			}</span>`
+					// 	},
+					// 	makes the days capital letters
+					// 	monthDayname(model) {
+					// 		console.log('monthDayName model:::', model)
+					// 		return (model.label).toString().toLocaleUpperCase();
+					// 	}
+					// }}
 
 				/>
 			</div>
