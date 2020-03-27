@@ -50,7 +50,7 @@ class NewLeave extends Component {
 		console.log("NewLeave this.props.auth:: ", this.props.auth)
 
 		//for layout
-		const { Header, Content, /*Footer*/ } = Layout;
+		const { Header, Content, Footer } = Layout;
 
 		const { getFieldDecorator } = this.props.form;
 
@@ -74,7 +74,7 @@ class NewLeave extends Component {
 
 		return (
 			<Layout>
-				<Header>
+				<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
 					{/* pass props to choose default selected tab */}
 					<MenuHeader selectedKey='leave' />
 				</Header>
@@ -135,6 +135,9 @@ class NewLeave extends Component {
 						<div style={{ margin: '24px' }} />
 					</Col>
 				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 	}

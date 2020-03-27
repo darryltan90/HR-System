@@ -33,7 +33,7 @@ class NewEmployee extends Component {
 	render() {
 
 		//for layout
-		const { Header, Content, /*Footer*/ } = Layout;
+		const { Header, Content, Footer } = Layout;
 
 		const { getFieldDecorator } = this.props.form;
 
@@ -56,11 +56,11 @@ class NewEmployee extends Component {
 
 		return (
 			<Layout>
-				<Header>
+				<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
 					<MenuHeader selectedKey='employees' />
 				</Header>
 				<Content>
-					<Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >
+					<Col style={{ margin: '84px 24px 24px 24px' }} span={5} push={9} >
 						<h1>New Employee</h1>
 						<Form onSubmit={this.onSubmit}>
 
@@ -115,6 +115,9 @@ class NewEmployee extends Component {
 						</Form>
 					</Col>
 				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 	}

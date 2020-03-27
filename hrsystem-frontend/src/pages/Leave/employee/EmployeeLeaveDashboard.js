@@ -15,7 +15,7 @@ class EmployeeLeaveDashboard extends Component {
 
 	render() {
 
-		const { Header, Content, /*Footer*/ } = Layout;
+		const { Header, Content, Footer } = Layout;
 
 		const { allLeaves } = this.props.reduxLeave
 
@@ -61,7 +61,7 @@ class EmployeeLeaveDashboard extends Component {
 			}
 
 			return (
-				<Col style={{ margin: '24px 24px 24px 24px' }}>
+				<Col style={{ margin: '84px 24px 24px 24px' }}>
 					<Button type='primary' style={{ margin: '0 0 24px' }} >
 						<Link to='/employee/leave/newLeave'>
 							New leave
@@ -90,13 +90,16 @@ class EmployeeLeaveDashboard extends Component {
 
 		return (
 			<Layout>
-				<Header>
+				<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
 					{/* pass props to choose default selected tab */}
 					<MenuHeader selectedKey="leave" />
 				</Header>
 				<Content>
 					{BoardAlgorithm(allLeaves)}
 				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 	}

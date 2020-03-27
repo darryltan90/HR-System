@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import { getLeaveByStatus } from '../actions/employeeLeavesActions'
 
-import Calendar from '@toast-ui/react-calendar';
-import 'tui-calendar/dist/tui-calendar.css';
-import { connect } from 'react-redux';
+import Calendar from '@toast-ui/react-calendar'
+import 'tui-calendar/dist/tui-calendar.css'
+import { connect } from 'react-redux'
+import { Button, Icon, Row, Col } from 'antd'
 
 // ???????
 // If you use the default popups, use this.
 // import 'tui-date-picker/dist/tui-date-picker.css';
 // import 'tui-time-picker/dist/tui-time-picker.css';
 
-
 class CalendarTUI extends Component {
-
 	calendarRef = React.createRef()
 
 	constructor() {
@@ -46,16 +45,20 @@ class CalendarTUI extends Component {
 				this.getDate('today')
 				return
 
-			default: break
+			// does not work for monthView
+			// case 'test':
+			// 	calendarInstance.setDate('2019-1')
+			// 	return
+
+			default:
+				break
 		}
 
 		console.log('test return here:::::')
-
 	}
 
 	// to show the month and year
-	getDate = (when) => {
-
+	getDate = when => {
 		var tempDate = new Date()
 		var splitDate = []
 		var splitMonth = 0
@@ -73,8 +76,8 @@ class CalendarTUI extends Component {
 				//splits the current date into [year, month]
 				splitDate = this.state.stateDate.split('-')
 				splitYear = parseInt(splitDate[0], 10)
-				splitMonth = (parseInt(splitDate[1], 10) + 1)
-				
+				splitMonth = parseInt(splitDate[1], 10) + 1
+
 				if (splitMonth === 13) {
 					splitMonth = 1
 					splitYear++
@@ -87,79 +90,96 @@ class CalendarTUI extends Component {
 				//splits the current date into [year, month]
 				splitDate = this.state.stateDate.split('-')
 				splitYear = parseInt(splitDate[0], 10)
-				splitMonth = (parseInt(splitDate[1], 10) - 1)
+				splitMonth = parseInt(splitDate[1], 10) - 1
 
 				if (splitMonth === 0) {
 					splitMonth = 12
 					splitYear--
 				}
-				
-				this.setState({ stateDate: splitYear+ '-' + splitMonth})
+
+				this.setState({ stateDate: splitYear + '-' + splitMonth })
 				break
 
 			default:
 				console.log('**getDate error**')
 				break
 		}
-
 	}
 
 	render() {
-
-		console.log("this.props.calendarLeaves:::", this.props.calendarLeaves)
-
+		console.log('this.props.calendarLeaves:::', this.props.calendarLeaves)
 
 		const calendarOptions = {
 			usageStatistics: false,
 			view: 'month',
 			height: '800px',
-			isReadOnly: true,
-
+			isReadOnly: true
 		}
 
-		const testCalSchedule = this.props.calendarLeaves.map(leave => (
-			{
-				id: leave.id,
-				title: leave.leaveType + ": " + leave.employee.empName,
-				start: leave.startDate,
-				end: leave.endDate,
-				bgColor: leave.leaveType === 'Medical' ?
-					'lightgreen' :
-					leave.leaveType === 'Annual' ?
-						'yellow' :
-						'grey',
-				category: 'allday',
-				// modify here for halfday leave
-			}
-		))
+		const testCalSchedule = this.props.calendarLeaves.map(leave => ({
+			id: leave.id,
+			title: leave.leaveType + ': ' + leave.employee.empName,
+			start: leave.startDate,
+			end: leave.endDate,
+			bgColor:
+				leave.leaveType === 'Medical'
+					? 'lightgreen'
+					: leave.leaveType === 'Annual'
+						? 'yellow'
+						: 'grey',
+			category: 'allday'
+			// modify here for halfday leave
+		}))
 
 		return (
 			<div>
-				<h1>{this.state.stateDate}</h1>
-				<button onClick={() => this.navigateCal('prev')}>Previous month</button>
-				<button onClick={() => this.navigateCal('next')}>Next month</button>
-				<button onClick={() => this.navigateCal('today')}>Current month</button>
+				<Row>
+					<Button
+						size="large"
+						shape="circle"
+						onClick={() => this.navigateCal('prev')}
+					>
+						<Icon type="left" />
+					</Button>
+
+					<Button
+						size="large"
+						shape="circle"
+						onClick={() => this.navigateCal('next')}
+					>
+						<Icon type="right" />
+					</Button>
+
+					<Button
+						size="large"
+						shape="round"
+						onClick={() => this.navigateCal('today')}
+					>
+						Current month
+					</Button>
+				</Row>
+
+				<font size="+1">{this.state.stateDate}</font>
+				{/* <button onClick={() => this.navigateCal('test')}>Test</button> */}
 				{/* dropdown menu to select month/year */}
 				<Calendar
 					ref={this.calendarRef}
 					{...calendarOptions}
 					schedules={testCalSchedule}
-					// template={{
-					// 	milestone(schedule) {
-					// 		return `<span style="color:#fff;background-color: ${schedule.bgColor};">${
-					// 			schedule.title
-					// 			}</span>`
-					// 	},
-					// 	makes the days capital letters
-					// 	monthDayname(model) {
-					// 		console.log('monthDayName model:::', model)
-					// 		return (model.label).toString().toLocaleUpperCase();
-					// 	}
-					// }}
-
+				// template={{
+				// 	milestone(schedule) {
+				// 		return `<span style="color:#fff;background-color: ${schedule.bgColor};">${
+				// 			schedule.title
+				// 			}</span>`
+				// 	},
+				// 	makes the days capital letters
+				// 	monthDayname(model) {
+				// 		console.log('monthDayName model:::', model)
+				// 		return (model.label).toString().toLocaleUpperCase();
+				// 	}
+				// }}
 				/>
 			</div>
-
 		)
 	}
 }

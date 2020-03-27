@@ -47,7 +47,7 @@ class AdminEmployeeDashboard extends Component {
 	}
 
 	render() {
-		const { Header, Content, /*Footer*/ } = Layout
+		const { Header, Content, Footer } = Layout
 
 		console.log('AdminEmployeeDashboard this.props.allEmployees::: ', this.props.allEmployees)
 
@@ -107,11 +107,11 @@ class AdminEmployeeDashboard extends Component {
 
 		return (
 			<Layout>
-				<Header>
+				<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
 					<MenuHeader selectedKey="employees" />
 				</Header>
 				<Content>
-					<Col span={20} style={{ margin: '50px 0px 24px 120px' }}>
+					<Col span={20} style={{ margin: '150px 0px 24px 120px' }}>
 						<Button type='primary' style={{ marginBottom: '24px' }} >
 							<Link to='/admin/employees/newEmployee' >
 								New employee
@@ -125,6 +125,9 @@ class AdminEmployeeDashboard extends Component {
 						/>
 					</Col>
 				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 	}

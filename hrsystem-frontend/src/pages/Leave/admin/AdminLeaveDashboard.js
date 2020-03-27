@@ -13,7 +13,7 @@ class AdminLeaveDashboard extends Component {
 
 	render() {
 
-		const { Header, Content, /*Footer*/ } = Layout;
+		const { Header, Content, Footer } = Layout;
 
 		const { allLeaves } = this.props.reduxLeave
 		console.log('AdminLeaveDashBoard allLeaves:::', allLeaves)
@@ -60,7 +60,7 @@ class AdminLeaveDashboard extends Component {
 			}
 
 			return (
-				<Col style={{ margin: '24px 24px 24px 24px' }}>
+				<Col style={{ margin: '84px 24px 24px 24px' }}>
 					<Row gutter={16}>
 						<Col span={8}>
 							<Card title="Pending" >
@@ -84,13 +84,16 @@ class AdminLeaveDashboard extends Component {
 
 		return (
 			<Layout>
-				<Header>
+				<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
 					{/* pass props to choose default selected tab */}
 					<MenuHeader selectedKey='adminLeave' />
 				</Header>
 				<Content>
 					{BoardAlgorithm(allLeaves)}
 				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 

@@ -39,7 +39,7 @@ class UpdateEmployee extends Component {
 	render() {
 
 		//for layout
-		const { Header, Content, /*Footer*/ } = Layout;
+		const { Header, Content, Footer } = Layout;
 
 		const { getFieldDecorator } = this.props.form;
 
@@ -71,7 +71,7 @@ class UpdateEmployee extends Component {
 					<MenuHeader selectedKey='employees' />
 				</Header>
 				<Content>
-					<Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >
+					<Col style={{ margin: '84px 24px 24px 24px' }} span={5} push={9} >
 						<h1>Update Employee</h1>
 						<Form onSubmit={this.onSubmit}>
 
@@ -127,6 +127,9 @@ class UpdateEmployee extends Component {
 						</Form>
 					</Col>
 				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 	}

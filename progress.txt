@@ -21,20 +21,11 @@ change date data type(refer to email)
 (frontend - BrowserRouter as Router)
 reduce url length by using 'basename'
 --------------------------------------------IN PROGRESS--------------------------------------------
+
+
+------------------------------------------------DONE-----------------------------------------------
 fix all headers to top(refer calendar)
 
 show the current month
 
-go to specific date
-
-check tui template on how to convert
-
-change date to string
-
-------------------------------------------------DONE-----------------------------------------------
-npm uninstall @material-ui/core @material-ui/pickers
-
-**npm install tui-calendar**
-
-(frontend - CALENDAR)
-shows whoever is on leave
+go to specific date (unable to complete)

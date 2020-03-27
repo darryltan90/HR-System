@@ -55,7 +55,7 @@ class UpdateLeave extends Component {
 		console.log("UpdateLeave this.state: ", JSON.stringify(this.state))
 
 		//for layout
-		const { Header, Content, /*Footer*/ } = Layout;
+		const { Header, Content, Footer } = Layout;
 
 		const { getFieldDecorator } = this.props.form;
 
@@ -82,7 +82,7 @@ class UpdateLeave extends Component {
 
 		return (
 			<Layout>
-				<Header>
+				<Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
 					{/* pass props to choose default selected tab */}
 					<MenuHeader selectedKey='leave' />
 				</Header>
@@ -146,6 +146,9 @@ class UpdateLeave extends Component {
 						<div style={{ margin: '24px' }} />
 					</Col>
 				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 	}
