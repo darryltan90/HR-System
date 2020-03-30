@@ -61,7 +61,7 @@ class EmployeeLeaveDashboard extends Component {
 			}
 
 			return (
-				<Col style={{ margin: '84px 24px 24px 24px' }}>
+				<Col style={{ margin: '94px 24px 24px 24px' }}>
 					<Button type='primary' style={{ margin: '0 0 24px' }} >
 						<Link to='/employee/leave/newLeave'>
 							New leave

@@ -3,7 +3,6 @@ import { Layout, Col } from 'antd'
 // import Calendar from 'tui-calendar'
 import MenuHeader from '../components/MenuHeader'
 import CalendarTUI from '../components/CalendarTUI';
-import Calendar from 'tui-calendar';
 
 
 

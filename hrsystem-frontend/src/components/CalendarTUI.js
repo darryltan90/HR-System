@@ -4,7 +4,7 @@ import { getLeaveByStatus } from '../actions/employeeLeavesActions'
 import Calendar from '@toast-ui/react-calendar'
 import 'tui-calendar/dist/tui-calendar.css'
 import { connect } from 'react-redux'
-import { Button, Icon, Row, Col } from 'antd'
+import { Button, Icon, Row } from 'antd'
 
 // ???????
 // If you use the default popups, use this.
@@ -109,14 +109,16 @@ class CalendarTUI extends Component {
 	render() {
 		console.log('this.props.calendarLeaves:::', this.props.calendarLeaves)
 
+		// calendar settings from TUI
 		const calendarOptions = {
-			usageStatistics: false,
+			usageStatistics: false, //if enabled, will send hostname
 			view: 'month',
 			height: '800px',
 			isReadOnly: true
 		}
 
-		const testCalSchedule = this.props.calendarLeaves.map(leave => ({
+		// to convert each leave into a schedule for TUI Calendar compatibility
+		const calSchedule = this.props.calendarLeaves.map(leave => ({
 			id: leave.id,
 			title: leave.leaveType + ': ' + leave.employee.empName,
 			start: leave.startDate,
@@ -164,8 +166,8 @@ class CalendarTUI extends Component {
 				{/* dropdown menu to select month/year */}
 				<Calendar
 					ref={this.calendarRef}
-					{...calendarOptions}
-					schedules={testCalSchedule}
+					{...calendarOptions} //calendar settings from TUI
+					schedules={calSchedule} //displaying leaves
 				// template={{
 				// 	milestone(schedule) {
 				// 		return `<span style="color:#fff;background-color: ${schedule.bgColor};">${

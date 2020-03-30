@@ -60,7 +60,7 @@ class AdminLeaveDashboard extends Component {
 			}
 
 			return (
-				<Col style={{ margin: '84px 24px 24px 24px' }}>
+				<Col style={{ margin: '94px 24px 24px 24px' }}>
 					<Row gutter={16}>
 						<Col span={8}>
 							<Card title="Pending" >

@@ -111,7 +111,7 @@ class AdminEmployeeDashboard extends Component {
 					<MenuHeader selectedKey="employees" />
 				</Header>
 				<Content>
-					<Col span={20} style={{ margin: '150px 0px 24px 120px' }}>
+					<Col span={20} style={{ margin: '94px 0px 24px 120px' }}>
 						<Button type='primary' style={{ marginBottom: '24px' }} >
 							<Link to='/admin/employees/newEmployee' >
 								New employee

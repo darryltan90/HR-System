@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Layout, Col, Button, Row, Form, Input } from 'antd'
 import logo from './../../images/workspez_logo.png'
-import { Link } from 'react-router-dom'
 import { getEmpDetails } from "../../actions/authenticatorActions";
 import PropTypes from "prop-types";
 import { compose } from 'redux';

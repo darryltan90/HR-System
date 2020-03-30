@@ -71,7 +71,7 @@ class UpdateEmployee extends Component {
 					<MenuHeader selectedKey='employees' />
 				</Header>
 				<Content>
-					<Col style={{ margin: '84px 24px 24px 24px' }} span={5} push={9} >
+					<Col style={{ margin: '94px 24px 24px 24px' }} span={5} push={9} >
 						<h1>Update Employee</h1>
 						<Form onSubmit={this.onSubmit}>
 
