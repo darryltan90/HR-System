@@ -1,58 +1,24 @@
 import React, { Component } from 'react'
 import { Layout, Col, Form, Input, Select, Row, Button } from 'antd';
 import MenuHeader from '../../../components/MenuHeader';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { addEmp } from '../../../actions/adminEmployeeActions';
 import { Link } from 'react-router-dom';
 
 class NewEmployee extends Component {
 
-	// when submit button is clicked
-	onSubmit = e => {
-		e.preventDefault()
+	onFinish = values => {
 
-		this.props.form.validateFields((err, fieldsValue) => {
-			if (err || fieldsValue['empType'] === undefined) {
-				return (console.log('error/emptype null:::', fieldsValue['empType']))
-			}
+		// output whole object with all relevant values
+		console.log('values received from form:::', values)
 
-			const newEmp = {
-				empName: fieldsValue['empName'],
-				email: fieldsValue['email'],
-				password: fieldsValue['password'],
-				empType: fieldsValue['empType']
-			}
-
-			console.log('NewEmployee received form values:: ', newEmp)
-
-			this.props.addEmp(newEmp, this.props.history)
-		})
+		this.props.addEmp(values, this.props.history)
 	}
 
 	render() {
 
 		//for layout
 		const { Header, Content, Footer } = Layout;
-
-		const { getFieldDecorator } = this.props.form;
-
-		const nameFieldDecorator = [{
-			rules: [{ required: true, message: "Please enter a name!" }]
-		}]
-
-		const empTypeFieldDecorator = [{
-			rules: [{ required: true, message: "Please select an employee type!" }],
-			initialValue: 'Employee'
-		}]
-
-		const emailFieldDecorator = [{
-			rules: [{ required: true, message: "Please enter an email!" }]
-		}]
-
-		const passwordFieldDecorator = [{
-			rules: [{ required: true, message: "Please enter a password!" }]
-		}]
 
 		return (
 			<Layout>
@@ -62,39 +28,41 @@ class NewEmployee extends Component {
 				<Content>
 					<Col style={{ margin: '94px 24px 24px 24px' }} span={5} push={9} >
 						<h1>New Employee</h1>
-						<Form onSubmit={this.onSubmit}>
+						<Form onFinish={this.onFinish}>
 
 							{/* employee name */}
-							<Form.Item>
-								{getFieldDecorator('empName', ...nameFieldDecorator)
-									(<Input placeholder='Employee name' />)
-								}
+							<Form.Item
+								name='empName'
+								rules={[{ required: true, message: "Please enter a name!" }]}
+							>
+								<Input placeholder='Employee name' />
 							</Form.Item>
 
 							{/* email */}
-							<Form.Item>
-								{getFieldDecorator('email', ...emailFieldDecorator)
-									(<Input placeholder='Email' />)
-								}
+							<Form.Item
+								name='email'
+								rules={[{ required: true, message: "Please enter an email!" }]}
+							>
+								<Input placeholder='Email' />
 							</Form.Item>
 
 							{/* password */}
-							<Form.Item>
-								{getFieldDecorator('password', ...passwordFieldDecorator)
-									(<Input placeholder='Password' />)
-								}
+							<Form.Item
+								name='password'
+								rules={[{ required: true, message: "Please enter a password!" }]}
+							>
+								<Input placeholder='Password' />
 							</Form.Item>
 
 							{/* employee type */}
-							<Form.Item>
-								{getFieldDecorator("empType", { ...empTypeFieldDecorator })(
-									<Select
-										placeholder="Employee type"
-									>
-										<Select.Option value="admin">Admin</Select.Option>
-										<Select.Option value="employee">Employee</Select.Option>
-									</Select>
-								)}
+							<Form.Item
+								name='empType'
+								rules={[{ required: true, message: "Please select an employee type!" }]}
+							>
+								<Select placeholder="Employee type">
+									<Select.Option value="admin">Admin</Select.Option>
+									<Select.Option value="employee">Employee</Select.Option>
+								</Select>
 							</Form.Item>
 
 							{/* -----------buttons----------- */}
@@ -115,6 +83,7 @@ class NewEmployee extends Component {
 						</Form>
 					</Col>
 				</Content>
+
 				<Footer style={{ textAlign: 'center' }}>
 					HR System
 				</Footer>
@@ -123,4 +92,4 @@ class NewEmployee extends Component {
 	}
 }
 
-export default compose(connect(null, { addEmp }), Form.create())(NewEmployee)
+export default connect(null, { addEmp })(NewEmployee)

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Card, Icon, Popconfirm } from 'antd'
+import { Card, Popconfirm } from 'antd'
 import Meta from 'antd/lib/card/Meta'
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { deleteLeave, getLeave } from "../../../../actions/employeeLeavesActions";
+import { Icon } from '@ant-design/compatible'
 
 class LeaveCard extends Component {
 

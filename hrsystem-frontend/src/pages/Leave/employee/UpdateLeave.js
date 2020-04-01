@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addLeave, getLeave } from "../../../actions/employeeLeavesActions";
-import { compose } from 'redux';
 
 
 class UpdateLeave extends Component {
@@ -44,6 +43,26 @@ class UpdateLeave extends Component {
 		});
 	};
 
+	onFinish = values => {
+
+		console.log('all received values', values)
+
+		const rangeValue = values["range-picker"]
+
+		const updateLeave = {
+			"employee": this.props.auth,
+			"leaveType": values['leave-type'],
+			"startDate": rangeValue[0].format("YYYY-MM-DD"),
+			"endDate": rangeValue[1].format("YYYY-MM-DD"),
+			"reason": values['reason'],
+			"status": 'PENDING' //do not change, initial value will always be 'PENDING'
+		}
+
+		console.log('updateLeave:::', updateLeave)
+
+		this.props.addLeave(updateLeave, this.props.history)
+	}
+
 	disabledDate = (current) => {
 		// Cannot select days before today and today
 		return current && current < moment().endOf('day');
@@ -57,28 +76,11 @@ class UpdateLeave extends Component {
 		//for layout
 		const { Header, Content, Footer } = Layout;
 
-		const { getFieldDecorator } = this.props.form;
-
 		// values from global state
 		const { leaveType, startDate, endDate, reason } = this.props.leaveDetails
 
 		// fieldDecorator options for Datepicker.Rangepicker
 		const dateFormat = 'YYYY-MM-DD';
-		const rangePickerFieldDecorator = [{
-			rules: [{ type: "array", required: true, message: "Please select date!" }],
-			initialValue: [moment(startDate, dateFormat), moment(endDate, dateFormat)]
-		}];
-
-		// fieldDecorator options for Select
-		const leaveTypeFieldDecorator = [{
-			rules: [{ required: true, message: "Please select leave type!" }],
-			initialValue: leaveType
-		}]
-
-		// fieldDecorator options for Select
-		const reasonFieldDecorator = [{
-			initialValue: reason
-		}]
 
 		return (
 			<Layout>
@@ -89,45 +91,49 @@ class UpdateLeave extends Component {
 				<Content>
 					<Col style={{ margin: '94px 24px 24px 24px' }} span={5} push={9} >
 						<h1>Leave Request</h1>
-						<Form onSubmit={this.onSubmit}>
-							{/* -----------select menu----------- */}
-							<Form.Item>
-								{getFieldDecorator("leave-type", ...leaveTypeFieldDecorator)(
-									<Select
-										placeholder="Leave type"
-									//value={this.state.leaveType}
-									>
-										<Select.Option value="Annual">Annual</Select.Option>
-										<Select.Option value="Medical">Medical</Select.Option>
-										<Select.Option value="Unpaid">Unpaid</Select.Option>
-									</Select>
-								)}
+						<Form
+							onFinish={this.onFinish}
+							initialValues={{
+								'leave-type': leaveType,
+								'range-picker': [moment(startDate, dateFormat), moment(endDate, dateFormat)],
+								reason: reason
+							}}
+						>
+
+							{/* select menu */}
+							<Form.Item
+								name='leave-type'
+								rules={[{ required: true, message: "Please select leave type!" }]}
+							>
+								<Select placeholder="Leave type" >
+									<Select.Option value="Annual">Annual</Select.Option>
+									<Select.Option value="Medical">Medical</Select.Option>
+									<Select.Option value="Unpaid">Unpaid</Select.Option>
+								</Select>
 							</Form.Item>
 
-							{/* -----------date range picker----------- */}
+							{/* date range picker */}
 							<div style={{ margin: '24px' }} />
-							<Form.Item>
-								{getFieldDecorator("range-picker", ...rangePickerFieldDecorator)(<DatePicker.RangePicker
-									disabledDate={this.disabledDate}
-								//initialValue={[moment('2020-03-12', dateFormat), moment('2020-03-15', dateFormat)]}
-								//format={dateFormat}
-								/>)}
+							<Form.Item
+								name='range-picker'
+								rules={[{ type: "array", required: true, message: "Please select date!" }]}
+							>
+								<DatePicker.RangePicker disabledDate={this.disabledDate} />
 							</Form.Item>
 
-							{/* -----------textarea----------- */}
+							{/* textarea */}
 							<div style={{ margin: '24px' }} />
-							<Form.Item>
-								{getFieldDecorator('reason', ...reasonFieldDecorator)
-									(<TextArea
-										placeholder="Reason for leave"
-										allowClear //gives the X button on top right
-										autoSize={{ minRows: 6, maxRows: 6, }} //fixes row at 6
-									/>)
-								}
-
+							<Form.Item
+								name='reason'
+							>
+								<TextArea
+									placeholder="Reason for leave"
+									allowClear //gives the X button on top right
+									autoSize={{ minRows: 6, maxRows: 6, }} //fixes row at 6
+								/>
 							</Form.Item>
 
-							{/* -----------buttons----------- */}
+							{/* buttons */}
 							<Row type="flex" justify="space-around">
 								<Form.Item>
 									<Button type="danger" >
@@ -142,6 +148,7 @@ class UpdateLeave extends Component {
                         </Button>
 								</Form.Item>
 							</Row>
+
 						</Form>
 						<div style={{ margin: '24px' }} />
 					</Col>
@@ -167,4 +174,4 @@ const mapStateToProps = state => ({
 	leaveDetails: state.reduxLeave.leaveDetails,
 })
 
-export default compose(connect(mapStateToProps, { getLeave, addLeave }), Form.create())(UpdateLeave)
+export default connect(mapStateToProps, { getLeave, addLeave })(UpdateLeave)

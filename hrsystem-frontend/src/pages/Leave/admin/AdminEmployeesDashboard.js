@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Layout, Table, Col, Row, Icon, Button, Tag, Modal } from 'antd'
+import { Layout, Table, Col, Row, Button, Tag, Modal } from 'antd'
 import MenuHeader from '../../../components/MenuHeader'
 import { Link } from 'react-router-dom'
 import { getAllEmp, getEmp, deleteEmp } from '../../../actions/adminEmployeeActions'
 import { connect } from 'react-redux'
+import { Icon } from '@ant-design/compatible'
 
 
 class AdminEmployeeDashboard extends Component {

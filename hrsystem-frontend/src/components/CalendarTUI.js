@@ -4,7 +4,9 @@ import { getLeaveByStatus } from '../actions/employeeLeavesActions'
 import Calendar from '@toast-ui/react-calendar'
 import 'tui-calendar/dist/tui-calendar.css'
 import { connect } from 'react-redux'
-import { Button, Icon, Row } from 'antd'
+import { Button, Row } from 'antd'
+import { Icon } from '@ant-design/compatible'
+
 
 // ???????
 // If you use the default popups, use this.
@@ -135,7 +137,8 @@ class CalendarTUI extends Component {
 
 		return (
 			<div>
-				<Row>
+
+				<Row align='middle'>
 					<Button
 						size="large"
 						shape="circle"
@@ -159,9 +162,9 @@ class CalendarTUI extends Component {
 					>
 						Current month
 					</Button>
+					<font size="+4">{this.state.stateDate}</font>
 				</Row>
 
-				<font size="+1">{this.state.stateDate}</font>
 				{/* <button onClick={() => this.navigateCal('test')}>Test</button> */}
 				{/* dropdown menu to select month/year */}
 				<Calendar

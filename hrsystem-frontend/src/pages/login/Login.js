@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 class Login extends Component {
 
+	// not in use at the moment
 	onSubmit = e => {
 		// prevents the page from refreshing
 		e.preventDefault()
@@ -22,51 +23,66 @@ class Login extends Component {
 			//get employee leaves based on empId
 			this.props.getEmpDetails(fieldsValue["username"], fieldsValue["password"], this.props.history)
 		})
+
+		//get employee leaves based on empId
+		// this.props.getEmpDetails(fieldsValue["username"], fieldsValue["password"], this.props.history)
+	}
+
+	onFinish = values => {
+
+		console.log('username::::', values['username'])
+		console.log('password::::', values['password'])
+
+		//get employee leaves based on empId
+		this.props.getEmpDetails(values["username"], values["password"], this.props.history)
 	}
 
 	render() {
 
-		//const { Header, Content, /*Footer*/ } = Layout
-		const { getFieldDecorator } = this.props.form;
-
-		const usernameFieldDecorator = [{
-			rules: [{ required: true, message: "Please enter username!" }]
-		}]
-
-		const passwordFieldDecorator = [{
-			rules: [{ required: true, message: "Please enter password!" }]
-		}]
+		const { /*Header,*/ Content, Footer } = Layout
 
 		return (
 			<Layout>
-				<Layout.Content>
+				<Content>
 					<Col style={{ margin: '24px 24px 24px 24px' }} span={5} push={9} >
 						<img src={logo} alt="workspez logo" width='300' height='100' style={{ margin: '0 0 24px' }} />
 						<Row type="flex" justify="space-around">
-							<Form onSubmit={this.onSubmit}>
+							<Form onFinish={this.onFinish}>
+
+								{/* username */}
 								Username
-								<Form.Item>
-									{getFieldDecorator("username", ...usernameFieldDecorator)(
-										<Input placeholder="Username" />
-									)}
+								<Form.Item
+									name='username'
+									rules={[{ required: true, message: "Please enter username!" }]}
+								>
+									<Input placeholder="Username" />
 								</Form.Item>
+
+								{/* password */}
 								Password
-								<Form.Item>
-									{getFieldDecorator("password", ...passwordFieldDecorator)(
-										<Input.Password placeholder="password" />
-									)}
+								<Form.Item
+									name='password'
+									rules={[{ required: true, message: "Please enter password!" }]}
+								>
+									<Input.Password placeholder="password" />
 								</Form.Item>
+
+								{/* Login button */}
 								<Form.Item>
 									<Row type="flex" justify="space-around">
 										<Button type="primary" htmlType="submit">
 											Login
-									</Button>
+										</Button>
 									</Row>
 								</Form.Item>
+
 							</Form>
 						</Row>
 					</Col>
-				</Layout.Content>
+				</Content>
+				<Footer style={{ textAlign: 'center' }}>
+					HR System
+				</Footer>
 			</Layout>
 		)
 
@@ -77,4 +93,4 @@ Login.propType = {
 	getEmpDetails: PropTypes.func.isRequired
 }
 
-export default compose(connect(null, { getEmpDetails }), Form.create())(Login)
+export default connect(null, { getEmpDetails })(Login)

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Card, Icon, Popconfirm } from 'antd'
+import { Card, Popconfirm } from 'antd'
 import Meta from 'antd/lib/card/Meta'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { updateLeaveStatus } from "../../../../actions/adminLeavesActions";
+import { Icon } from '@ant-design/compatible'
 
 class LeaveCard extends Component {
 	//color = {}

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Menu, Row, Icon, Col, Popconfirm } from 'antd'
+import { Menu, Row, Col, Popconfirm } from 'antd'
 import logo from './../images/workspez_logo.png'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { resetReduxStore } from '../actions/authenticatorActions'
 import { compose } from 'redux'
+import { Icon } from '@ant-design/compatible'
+
 
 class MenuHeader extends Component {
 	//resets {auth} in redux
