@@ -50,6 +50,7 @@ class UpdateLeave extends Component {
 		const rangeValue = values["range-picker"]
 
 		const updateLeave = {
+			"id": this.props.leaveDetails.id,
 			"employee": this.props.auth,
 			"leaveType": values['leave-type'],
 			"startDate": rangeValue[0].format("YYYY-MM-DD"),
